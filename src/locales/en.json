@@ -1,0 +1,91 @@
+{
+  "lang": "en",
+  "components": {
+    "reverseAnswer": "Reverse Answer",
+    "reverseQuestion": "Reverse Question",
+    "remove": "Remove",
+    "fieldEmpty": "Field Empty!",
+    "linkId": "Link ID",
+    "navigationBar": {
+      "version": "Version",
+      "ImportJSONBtn": "Import JSON",
+      "ExportJSONBtn": "Export JSON",
+      "warningLeaveDialog": {
+        "title": "Warning",
+        "instructions": "Are you sure that you want to leave the edition questionnaire screen without exporting first?",
+        "continue": "Continue",
+        "cancel": "Cancel"
+      }
+    }
+  },
+  "views": {
+    "import": {
+      "dropFile": "Drop a file here",
+      "instructions": "Please upload a Questionnaire JSON file that you would like to edit. Drag & drop the file on this area or click here to select a file."
+    },
+    "editor": {
+      "conditionFulfilled":"Condition Fulfilled",
+      "enableWhenCondition":"Condition: enableWhen",
+      "questionDontexist": "Question does not exist in this Questionnaire.",
+      "backLastItem": "Back to item",
+      "navigateToItem": "Navigate to item",
+      "toSelectOneAnswer": "Double tap to select one answer option.",
+      "dragItem": "Drag Item",
+      "answers": "Answers",
+      "itemConditions": "Conditions",
+      "addNewCondition": "Add New Condition",
+      "addItem": "New Item",
+      "question": "Question",
+      "questions": "Questions",
+      "operator": "Operator",
+      "answer": "Answer",
+      "answerSelected": "Answer Overview",
+      "AnswerValueSet": "Answer Value Set",
+      "selectAnswer": "Select Question",
+      "AnswerOptions": "Answer Options",
+      "system": "System",
+      "code": "Code",
+      "newQuestion": "New Item",
+      "addAnswer": "ADD ANSWER",
+      "reverseText": "Reverse Original Text",
+      "newUUID": "New UUID",
+      "UUID": "UUID",
+      "regenerateUUID": "Regenerate UUID",
+      "showQuestionContidions": "Show Item Conditions",
+      "disableItem": "Disable Item",
+      "enableItem": "Enabled Item",
+      "originalText": "Original Text",
+      "optionsAnswers": {
+        "choice": "Choice",
+        "open": "Open",
+        "boolean": "Boolean"
+      }
+    }
+  },
+  "export": {
+    "successfully": "Successfully export"
+  },
+  "messagesErrors": {
+    "warning": "Warning",
+    "error": "Error",
+    "fileNoExported": "JSON File could no be exported. File was downloaded in Donwloads instead.",
+    "QuestionnaireValidations": {
+      "test": "test"
+    },
+    "FHIRValidations": {
+      "nodeMissing": "FHIR Resource Content Invalid! Missing Information on {node}. {item}",
+      "resourceImportedNoAllow": "Resource {resource} Imported is not allow",
+      "nodeMissingItem": "FHIR Resource Content Invalid! {node} in Item {linkId}.",
+      "typeNodeNoValAllow": "Item {linkId} {type} type value is not allow.",
+      "posiblesValues": "{currentValue} value is no allowed in {node}.",
+      "moreThan5Levels": "Item {linkId} has more that 5 levels.",
+      "answerOptionAndValueSetNoAllow": "Item {linkId} has [answerOption] and [answerValueSet], both are not allow.",
+      "linkId": "Item: [{linkId} - {text}] has an error, it doesn't follow the right secuence of LinkId. Link ID should be {internalId} instead if {linkId}. "
+    },
+    "GeneralJSONValidations": {
+      "test": "test",
+      "fileNoJSONType": "File {nameFile} imported is no a JSON File. Only JSON Files are allow.",
+      "NoJSONFILEStructure": "Content of file loaded has no a properly structure of a JSON. "
+    }
+  }
+}
