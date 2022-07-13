@@ -10,7 +10,7 @@ const exportJsonQuestionnaire = {
   getObjectWithouItemsDisables(jsonObject) {
     // To only keep items with linkId
     jsonObject.item = jsonObject.item.filter(
-      (element) => element.linkId !== ""
+      (element) => element.linkId !== "",
     );
 
     // For items within item
@@ -20,10 +20,14 @@ const exportJsonQuestionnaire = {
       }
 
       if (element.extensions) {
-
         var i = element.extensions.length;
-        while (i-- ) {
-          if ((!element.extensions[i].valueInteger || element.extensions[i].valueInteger === null) && (!element.extensions[i].valueString || element.extensions[i].valueString === "")) {
+        while (i--) {
+          if (
+            (!element.extensions[i].valueInteger ||
+              element.extensions[i].valueInteger === null) &&
+            (!element.extensions[i].valueString ||
+              element.extensions[i].valueString === "")
+          ) {
             element.extensions.splice(i, 1);
           }
         }

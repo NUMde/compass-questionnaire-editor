@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import importQuestionnaire from "../views/Import.vue";
+import importQuestionnaire from "../views/ImportScreen.vue";
 
 import store from "../store";
 

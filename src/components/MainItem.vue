@@ -72,10 +72,9 @@ export default {
   props: {
     item: Object,
   },
-  methods:{
+  methods: {
     ...mapMutations(["setSecondItemSelected"]),
-    clickSeconItem(){
-    }
+    clickSeconItem() {},
   },
   computed: {
     mainQUestions() {

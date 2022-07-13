@@ -53,7 +53,7 @@ const FHIRValidations = {
         item.enableWhen.forEach((element) => {
           let itemToAppendCondintion = this.getItemNodeByInternalID(
             element.question,
-            this.questionnaire.item
+            this.questionnaire.item,
           );
           if (itemToAppendCondintion) {
             if (!itemToAppendCondintion.__dependeceCondition) {
@@ -71,7 +71,7 @@ const FHIRValidations = {
             condition.__linkId = item.linkId;
             condition.__text = item.text;
             itemToAppendCondintion.__dependeceCondition.__questions.push(
-              condition
+              condition,
             );
           }
         });
@@ -135,7 +135,7 @@ const FHIRValidations = {
       this.errorMessages.push(
         this.i18n.global.t("messagesErrors.FHIRValidations.moreThan5Levels", {
           linkId: item.linkId,
-        })
+        }),
       );
     }
 
@@ -147,7 +147,7 @@ const FHIRValidations = {
           text: item.text,
           linkId: item.linkId,
           internalId: item.__linkId,
-        }
+        },
       )}`;
       throw new FHIRValidationException(message);
       /* this.errorMessages.push(
@@ -208,8 +208,8 @@ const FHIRValidations = {
           "messagesErrors.FHIRValidations.answerOptionAndValueSetNoAllow",
           {
             linkId: item.linkId,
-          }
-        )
+          },
+        ),
       );
     }
     if (item.answerValueSet) {
@@ -251,7 +251,7 @@ const FHIRValidations = {
         this.i18n.global.t("messagesErrors.FHIRValidations.nodeMissing", {
           node: "linkId",
           item: item,
-        })
+        }),
       );
     }
 
@@ -260,7 +260,7 @@ const FHIRValidations = {
         this.i18n.global.t("messagesErrors.FHIRValidations.nodeMissing", {
           node: "type",
           item: item,
-        })
+        }),
       );
     }
 
@@ -281,46 +281,72 @@ const FHIRValidations = {
           {
             linkId: item.linkId,
             type: item.type,
-          }
-        )
+          },
+        ),
       );
     }
     if (item.enableWhen) {
       this.validateEnableWhen(item);
     }
 
-    if(item.type === "integer"){
-      item.extensions = item.extensions || [];     
+    if (item.type === "integer") {
+      item.extensions = item.extensions || [];
 
-      if(!item.extensions.some(x => x.url === "http://hl7.org/fhir/StructureDefinition/questionnaire-sliderStepValue")){
+      if (
+        !item.extensions.some(
+          (x) =>
+            x.url ===
+            "http://hl7.org/fhir/StructureDefinition/questionnaire-sliderStepValue",
+        )
+      ) {
         item.extensions.splice(0, 0, {
           url: "http://hl7.org/fhir/StructureDefinition/questionnaire-sliderStepValue",
           valueInteger: null,
         });
       }
 
-      if(!item.extensions.some(x => x.url === "http://hl7.org/fhir/StructureDefinition/minValue")){
+      if (
+        !item.extensions.some(
+          (x) => x.url === "http://hl7.org/fhir/StructureDefinition/minValue",
+        )
+      ) {
         item.extensions.splice(1, 0, {
           url: "http://hl7.org/fhir/StructureDefinition/minValue",
           valueInteger: null,
         });
       }
 
-      if(!item.extensions.some(x => x.url === "https://num-compass.science/fhir/StructureDefinition/HighRangeLabel")){
+      if (
+        !item.extensions.some(
+          (x) =>
+            x.url ===
+            "https://num-compass.science/fhir/StructureDefinition/HighRangeLabel",
+        )
+      ) {
         item.extensions.splice(2, 0, {
           url: "https://num-compass.science/fhir/StructureDefinition/HighRangeLabel",
           valueString: "",
         });
       }
 
-      if(!item.extensions.some(x => x.url === "http://hl7.org/fhir/StructureDefinition/maxValue")){
+      if (
+        !item.extensions.some(
+          (x) => x.url === "http://hl7.org/fhir/StructureDefinition/maxValue",
+        )
+      ) {
         item.extensions.splice(3, 0, {
           url: "http://hl7.org/fhir/StructureDefinition/maxValue",
           valueInteger: null,
         });
       }
 
-      if(!item.extensions.some(x => x.url === "https://num-compass.science/fhir/StructureDefinition/HighRangeLabel")){
+      if (
+        !item.extensions.some(
+          (x) =>
+            x.url ===
+            "https://num-compass.science/fhir/StructureDefinition/HighRangeLabel",
+        )
+      ) {
         item.extensions.splice(4, 0, {
           url: "https://num-compass.science/fhir/StructureDefinition/HighRangeLabel",
           valueString: "",
@@ -359,7 +385,7 @@ const FHIRValidations = {
           that.i18n.global.t("messagesErrors.FHIRValidations.nodeMissingItem", {
             node: "enableWhen.question",
             linkId: item.linkId,
-          })
+          }),
         );
       }
       if (!element.operator) {
@@ -367,7 +393,7 @@ const FHIRValidations = {
           that.i18n.global.t("messagesErrors.FHIRValidations.nodeMissingItem", {
             node: "enableWhen.operator",
             linkId: item.linkId,
-          })
+          }),
         );
       }
       //missing  answer
@@ -383,7 +409,7 @@ const FHIRValidations = {
           that.i18n.global.t("messagesErrors.FHIRValidations.nodeMissingItem", {
             node: "enableWhen.answer[x]",
             linkId: item.linkId,
-          })
+          }),
         );
       }
 
@@ -420,7 +446,7 @@ const FHIRValidations = {
       this.errorMessages.push(
         this.i18n.global.t("messagesErrors.FHIRValidations.nodeMissing", {
           node: "status",
-        })
+        }),
       );
     }
     if (
@@ -433,7 +459,7 @@ const FHIRValidations = {
         this.i18n.global.t("messagesErrors.FHIRValidations.posiblesValues", {
           currentValue: FHIRobj.status,
           node: "status",
-        })
+        }),
       );
     }
   },
@@ -472,7 +498,7 @@ const FHIRValidations = {
     if (FHIRobj.resourceType !== "Questionnaire") {
       return this.i18n.global.t(
         "messagesErrors.FHIRValidations.resourceImportedNoAllow",
-        { resource: FHIRobj.resourceType }
+        { resource: FHIRobj.resourceType },
       );
     }
   },
@@ -488,7 +514,7 @@ const generalValidations = {
       JSON.parse(jsonFileString);
     } catch (error) {
       let message = `${this.i18n.global.t(
-        "messagesErrors.GeneralJSONValidations.NoJSONFILEStructure"
+        "messagesErrors.GeneralJSONValidations.NoJSONFILEStructure",
       )}
       ${error.message}`;
       throw new GeneralJSONValidationException(message);

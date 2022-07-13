@@ -1,5 +1,5 @@
 <template>
-  <q-page class="q-pa-md" style="min-height: 80vh;">
+  <q-page class="q-pa-md" style="min-height: 80vh">
     <div class="row items-center justify-center example-drag">
       <div class="upload">
         <div
@@ -121,13 +121,13 @@ export default {
           that.importJsonQuestionnaire.getValidateJSON(reader.result);
           that.messageErrorFHIR =
             that.importJsonQuestionnaire.getValidateFHIRResource(
-              JSON.parse(reader.result)
+              JSON.parse(reader.result),
             );
           that.hideLoading();
           if (that.messageErrorFHIR.length === 0) {
             that.setFileImported(newFile);
             that.uploadJSONQuestionnaire(
-              that.importJsonQuestionnaire.getQuestionnaireGUI()
+              that.importJsonQuestionnaire.getQuestionnaireGUI(),
             );
             that.$router.push("/");
           } else {
@@ -159,7 +159,7 @@ export default {
         if (!/\.(json)$/i.test(newFile.name)) {
           this.messageError = this.$t(
             "messagesErrors.GeneralJSONValidations.fileNoJSONType",
-            { nameFile: newFile.name }
+            { nameFile: newFile.name },
           );
           this.alertError = true;
           return prevent();

@@ -223,7 +223,7 @@ export default {
       }
       this.selectedItem = this.edtiorTools.getCurrentQuestionNodeByID(
         val,
-        this.item
+        this.item,
       );
     },
   },

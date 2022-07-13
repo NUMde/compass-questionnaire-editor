@@ -145,7 +145,7 @@
                               v-model="id.type.coding.userSelected"
                               :label="
                                 $t(
-                                  'views.tabs.metadata.type.coding.userSelected'
+                                  'views.tabs.metadata.type.coding.userSelected',
                                 )
                               "
                             />
@@ -245,12 +245,14 @@
         v-model="title"
         :label="$t('components.navigationBar.metadataItems.title')"
       />
-       <q-item tag="label" v-ripple v-if="$route.name !== 'Import'">
+      <q-item tag="label" v-ripple v-if="$route.name !== 'Import'">
         <q-item-section>
-          <q-item-label>{{$t('components.navigationBar.metadataItems.experimental')}}</q-item-label>
+          <q-item-label>{{
+            $t("components.navigationBar.metadataItems.experimental")
+          }}</q-item-label>
         </q-item-section>
         <q-item-section avatar>
-          <q-toggle color="red" v-model="experimental"/>
+          <q-toggle color="red" v-model="experimental" />
         </q-item-section>
       </q-item>
     </div>

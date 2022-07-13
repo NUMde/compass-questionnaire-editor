@@ -88,7 +88,7 @@ const edtiorTools = {
       parentArrayItem: [],
       getArray(internalId, currentNode) {
         let currentItemFounded = currentNode.find(
-          (element) => element.__internalID === internalId
+          (element) => element.__internalID === internalId,
         );
         if (currentItemFounded) {
           this.parentArrayItem = currentNode;
@@ -157,7 +157,7 @@ const edtiorTools = {
     } else {
       this.disableItem(
         oItemQuestionTodisabled,
-        oItemQuestionTodisabled.__active
+        oItemQuestionTodisabled.__active,
       );
     }
     if (id === oItemQuestionTodisabled.__internalID) {
@@ -218,7 +218,7 @@ const edtiorTools = {
       item.__OldAnswerValueSet = item.answerValueSet = "";
       item.__answerValueSetCheck = false;
     }
-    if(typeQuestion === this.questionTypes.integer){
+    if (typeQuestion === this.questionTypes.integer) {
       item.extensions = [
         {
           url: "http://hl7.org/fhir/StructureDefinition/questionnaire-sliderStepValue",
@@ -293,7 +293,7 @@ const edtiorTools = {
         item.enableWhen.forEach((element) => {
           let itemToAppendCondintion = that.getItemNodeByInternalID(
             element.question,
-            rootItem
+            rootItem,
           );
           if (itemToAppendCondintion) {
             if (!itemToAppendCondintion.__dependeceCondition) {
@@ -311,7 +311,7 @@ const edtiorTools = {
             condition.__linkId = item.linkId;
             condition.__text = item.text;
             itemToAppendCondintion.__dependeceCondition.__questions.push(
-              condition
+              condition,
             );
           }
         });

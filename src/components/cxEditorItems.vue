@@ -109,13 +109,7 @@
                   </div>
                 </div>
                 <div
-                  class="
-                    row
-                    items-center
-                    justify-between
-                    text-caption text-grey-8
-                    non-selectable
-                  "
+                  class="row items-center justify-between text-caption text-grey-8 non-selectable"
                   style="width: 100%"
                 >
                   <span
@@ -180,13 +174,7 @@
               />
             </div>
             <div
-              class="
-                row
-                items-center
-                justify-between
-                text-caption text-grey-8
-                non-selectable
-              "
+              class="row items-center justify-between text-caption text-grey-8 non-selectable"
               style="width: 100%"
             >
               <span>{{ selectedItem.type }}</span>
@@ -791,7 +779,7 @@
                         ></q-input>
                       </q-card-section>
                     </q-item-section>
-                     <q-item-section>
+                    <q-item-section>
                       <q-card-section>
                         <q-input
                           v-if="selectedItem.type === 'integer'"
@@ -940,7 +928,7 @@ export default {
       }
       const itemSelected = this.edtiorTools.getCurrentQuestionNodeByLinkId(
         $event,
-        this.item
+        this.item,
       );
       if (Object.keys(itemSelected).length > 0) {
         this.lastSelected = this.selected;
@@ -1041,7 +1029,7 @@ export default {
 
       const itemSource = this.edtiorTools.getCurrentQuestionNodeByID(
         draggedId,
-        this.item
+        this.item,
       );
 
       if (Object.keys(itemSource).length === 0) {
@@ -1055,7 +1043,7 @@ export default {
 
       const itemTarget = this.edtiorTools.getCurrentQuestionNodeByID(
         internalIDTarget,
-        this.item
+        this.item,
       );
 
       if (itemTarget.linkId === "" || itemSource.linkId === "") {
@@ -1065,7 +1053,7 @@ export default {
       //check if source Item Is the parent for target-> Not Allow
       const itemNodeChild = this.edtiorTools.getCurrentQuestionNodeByID(
         itemTarget.__internalID,
-        itemSource.item
+        itemSource.item,
       );
       if (Object.keys(itemNodeChild).length > 0) {
         return;
@@ -1089,18 +1077,18 @@ export default {
 
       const aitemParentSource = this.edtiorTools.getArraySource(
         draggedId,
-        this.item
+        this.item,
       );
 
       const itemToBeMoved = this.edtiorTools.getCurrentQuestionNodeByID(
         draggedId,
-        this.item
+        this.item,
       );
 
       if (itemToBeMoved.item) {
         //no allow more than 5 levels of items, nested Items
         let numLevel = this.edtiorTools.getNumbersMaxOfLevels(
-          itemToBeMoved.item
+          itemToBeMoved.item,
         );
         numLevel++; //count parent
         let totalOfLevelts = itemTarget.linkId.split(".").length + numLevel;
@@ -1118,17 +1106,17 @@ export default {
 
       const aitemParentTarget = this.edtiorTools.getArraySource(
         internalIDTarget,
-        this.item
+        this.item,
       );
 
       const indexOfItemtoBeInsert = this.edtiorTools.getIndexItem(
         internalIDTarget,
-        aitemParentTarget
+        aitemParentTarget,
       );
 
       let indexOfItemtoBeRemoved = this.edtiorTools.getIndexItem(
         draggedId,
-        aitemParentSource
+        aitemParentSource,
       );
 
       //Insert Inside Group Item: at the end
@@ -1195,13 +1183,13 @@ export default {
       if (e.type == "choice") {
         answerOption = this.edtiorTools.getNewAnswerValueCoding(
           { text: "", type: e.type },
-          this.selectedItem.answerOption
+          this.selectedItem.answerOption,
         );
       }
       if (e.type == "open-choice") {
         answerOption = this.edtiorTools.getNewAnswerValueString(
           { text: "Answer", type: e.type },
-          this.selectedItem.answerOption
+          this.selectedItem.answerOption,
         );
       }
       if (!this.selectedItem.answerOption) {
@@ -1220,7 +1208,7 @@ export default {
       if (e.name === "coding") {
         newItemAnswer = this.edtiorTools.getNewAnswerValueCoding(
           { text: "", type: that.selectedItem.type },
-          this.selectedItem.answerOption
+          this.selectedItem.answerOption,
         );
       } else {
         newItemAnswer = {
@@ -1245,7 +1233,7 @@ export default {
     onRemoveAnswer(e) {
       const indexOfItemtoBeRemoved = this.edtiorTools.getIndexAnswer(
         e.__id,
-        this.selectedItem.answerOption
+        this.selectedItem.answerOption,
       );
       this.selectedItem.answerOption.splice(indexOfItemtoBeRemoved, 1);
     },
@@ -1293,7 +1281,7 @@ export default {
       var result = questionTypesIcons.filter(
         (x) =>
           !(!this.getChoice && x.name == "choice") &&
-          !(!this.getOpenChoice && x.name == "open-choice")
+          !(!this.getOpenChoice && x.name == "open-choice"),
       );
       return result;
     },
@@ -1308,7 +1296,7 @@ export default {
       }
       this.selectedItem = this.edtiorTools.getCurrentQuestionNodeByID(
         val,
-        this.item
+        this.item,
       );
     },
     lastSelected(val) {
