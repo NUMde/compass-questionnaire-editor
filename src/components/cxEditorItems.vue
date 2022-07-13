@@ -975,7 +975,6 @@ export default {
       this.layout = false;
     },
     onSelectedQuestion(e) {
-      debugger;
       this.enableWhenItem.question = e.linkId;
       this.enableWhenItem.answer = "";
       this.enableWhenItem.type = e.type;

@@ -229,7 +229,6 @@ export default {
   },
   methods: {
     onSelectQuestion(questionSelected) {
-      debugger;
       this.$emit("question", questionSelected);
     },
     filterItemToBeShown(node) {
@@ -242,7 +241,6 @@ export default {
       return toBeAdd;
     },
     onSelectAnswer(answerOption) {
-      debugger;
       this.$emit("choiceQuestion", answerOption);
     },
   },
