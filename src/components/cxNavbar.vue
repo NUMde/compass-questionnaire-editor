@@ -1,12 +1,6 @@
 <template>
   <q-toolbar>
     <q-img src="@/assets/logo.png" width="120px" class="toolbar_logo" />
-    <!-- version -->
-    <q-input
-      v-if="$route.name !== 'Import'"
-      v-model="version"
-      :label="$t('components.navigationBar.version')"
-    />
     <q-toolbar-title class="text-center">{{
       getNameofQuestionnaire
     }}</q-toolbar-title>
@@ -27,6 +21,15 @@
       no-caps
       @click="exporting"
       >{{ $t("components.navigationBar.ExportJSONBtn") }}</q-btn
+    >
+    <q-btn
+      v-if="$route.name === 'Import'"
+      icon="post_add"
+      flat
+      stack
+      no-caps
+      @click="createNewEmptyQRE"
+      >{{ $t("components.navigationBar.createNewQRE") }}</q-btn
     >
   </q-toolbar>
 
@@ -109,7 +112,7 @@
 </template>
 <script>
 import { ref } from "vue";
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 import { useQuasar } from "quasar";
 import FileSaver from "file-saver";
 import { exportJsonQuestionnaire } from "../utils/exportJson";
@@ -120,14 +123,6 @@ export default {
       "getQuestionnaireImportedJSON",
       "getVersionQuestionnaire",
     ]),
-    version: {
-      get() {
-        return this.$store.state.questionnaireImported.version;
-      },
-      set(value) {
-        this.$store.commit("setVersion", value);
-      },
-    },
   },
   data() {
     return {
@@ -158,9 +153,18 @@ export default {
       : {};
   },
   methods: {
-    ...mapMutations(["resetQuestionnaire", "updateVersion"]),
+    ...mapMutations([
+      "resetQuestionnaire",
+      "updateVersion",
+      "setFileImported",
+      "setNameofQuestionnaireNEW",
+    ]),
+    ...mapActions(["uploadJSONQuestionnaire"]),
     importing: function () {
       this.alertWantToLeaveScreen = true;
+    },
+    editMetadata: function () {
+      this.alertMetadata = true;
     },
     continueLeavingEditionScreen: function () {
       this.resetQuestionnaire();
@@ -191,7 +195,7 @@ export default {
             },
           ],
         };
-        
+
         const newHandle = await window.showSaveFilePicker(opts);
 
         const writableStream = await newHandle.createWritable();
@@ -210,6 +214,15 @@ export default {
         }
         this.hideLoading();
       }
+    },
+    createNewEmptyQRE() {
+      let newQRE = {
+        resourceType: "Questionnaire",
+        status: "draft",
+      };
+      this.uploadJSONQuestionnaire(newQRE);
+      this.setNameofQuestionnaireNEW();
+      this.$router.push("/");
     },
   },
 };

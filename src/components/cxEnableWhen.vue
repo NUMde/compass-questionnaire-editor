@@ -106,7 +106,9 @@
                     "
                     v-for="answerOption in selectedItem.answerOption"
                     :key="answerOption"
-                    ><q-item-section
+                  >
+                    <!--Coding Answer type -->
+                    <q-item-section v-if="answerOption.__type === 'coding'"
                       ><q-item-label>{{
                         answerOption.valueCoding.display
                       }}</q-item-label
@@ -114,10 +116,34 @@
                         answerOption.valueCoding.system
                       }}</q-item-label>
                     </q-item-section>
-                    <q-item-section side top>
+                    <q-item-section
+                      side
+                      top
+                      v-if="answerOption.__type === 'coding'"
+                    >
                       <q-item-label caption>{{
                         answerOption.valueCoding.code
                       }}</q-item-label>
+                    </q-item-section>
+                    <q-item-section v-if="answerOption.__type === 'integer'"
+                      ><q-item-label>{{
+                        answerOption.valueInteger
+                      }}</q-item-label>
+                      <q-item-label caption lines="2">
+                        valueInteger
+                      </q-item-label>
+                    </q-item-section>
+                    <q-item-section v-if="answerOption.__type === 'date'"
+                      ><q-item-label>{{ answerOption.valueDate }}</q-item-label>
+                      <q-item-label caption lines="2"> valueDate </q-item-label>
+                    </q-item-section>
+                    <q-item-section v-if="answerOption.__type === 'string'"
+                      ><q-item-label>{{
+                        answerOption.valueString
+                      }}</q-item-label>
+                      <q-item-label caption lines="2">
+                        valueString
+                      </q-item-label>
                     </q-item-section>
                   </q-item>
                 </q-list>
@@ -203,6 +229,7 @@ export default {
   },
   methods: {
     onSelectQuestion(questionSelected) {
+      debugger;
       this.$emit("question", questionSelected);
     },
     filterItemToBeShown(node) {
@@ -215,6 +242,7 @@ export default {
       return toBeAdd;
     },
     onSelectAnswer(answerOption) {
+      debugger;
       this.$emit("choiceQuestion", answerOption);
     },
   },

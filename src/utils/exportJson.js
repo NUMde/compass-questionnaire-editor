@@ -2,7 +2,9 @@ import i18n from "../i18n";
 const exportJsonQuestionnaire = {
   getExportObject(jsonObject) {
     let cloneObject = this.getObjectExportCopy(jsonObject);
-    const finalObj = this.getObjectWithouItemsDisables(cloneObject);
+    const objWithoutItemsDisabled =
+      this.getObjectWithouItemsDisables(cloneObject);
+    const finalObj = this.clearMetadatafields(objWithoutItemsDisabled);
     return finalObj;
   },
   getObjectWithouItemsDisables(jsonObject) {
@@ -15,6 +17,20 @@ const exportJsonQuestionnaire = {
     jsonObject.item.forEach((element) => {
       if (element.item) {
         this.getObjectWithouItemsDisables(element);
+      }
+
+      if (element.extensions) {
+
+        var i = element.extensions.length;
+        while (i-- ) {
+          if ((!element.extensions[i].valueInteger || element.extensions[i].valueInteger === null) && (!element.extensions[i].valueString || element.extensions[i].valueString === "")) {
+            element.extensions.splice(i, 1);
+          }
+        }
+
+        if (element.extensions.length === 0) {
+          delete element.extensions;
+        }
       }
 
       //convert to integer ValueInteger
@@ -73,7 +89,11 @@ const exportJsonQuestionnaire = {
           if (element.type === "string") {
             element.answerString = element.answer;
           }
-          if (element.type === "choice" || element.type === "open-choice") {
+          if (
+            element.type === "choice" ||
+            element.type === "open-choice" ||
+            element.type === "coding"
+          ) {
             element.answerCoding = {};
             element.answerCoding.code = element.answer;
             element.answerCoding.display = element.display;
@@ -123,6 +143,91 @@ const exportJsonQuestionnaire = {
       newArray.push(this.getObjectExportCopy(array[index]));
     }
     return newArray;
+  },
+  clearMetadatafields(jsonObject) {
+    //Version
+    if (jsonObject.version === "") {
+      delete jsonObject.version;
+    }
+    //URL
+    if (jsonObject.url === "") {
+      delete jsonObject.url;
+    }
+    //Name
+    if (jsonObject.name === "") {
+      delete jsonObject.name;
+    }
+    //Status
+    if (jsonObject.status === "") {
+      delete jsonObject.status;
+    }
+    //publisher
+    if (jsonObject.publisher === "") {
+      delete jsonObject.publisher;
+    }
+    //title
+    if (jsonObject.title === "") {
+      delete jsonObject.title;
+    }
+    //approvalDate
+    if (jsonObject.date === null) {
+      delete jsonObject.date;
+    }
+    //approvalDate
+    if (jsonObject.approvalDate === null) {
+      delete jsonObject.approvalDate;
+    }
+    //lastReviewDate
+    if (jsonObject.lastReviewDate === null) {
+      delete jsonObject.lastReviewDate;
+    }
+    //experimental
+    if (jsonObject.experimental === null) {
+      delete jsonObject.experimental;
+    }
+    //Identifier
+    if (jsonObject?.identifier?.length > 0) {
+      let clearedId = [];
+      jsonObject?.identifier.forEach((identifier) => {
+        let removeUserSelected = true;
+        identifier?.use === "" ? delete identifier.use : "";
+        identifier?.system === "" ? delete identifier.system : "";
+        identifier?.value === "" ? delete identifier.value : "";
+        identifier?.period?.start === "" ? delete identifier.period.start : "";
+        identifier?.period?.end === "" ? delete identifier.period.end : "";
+        Object.values(identifier?.period).length === 0
+          ? delete identifier.period
+          : "";
+        identifier?.type?.coding?.system === ""
+          ? delete identifier.type.coding.system
+          : (removeUserSelected = false);
+        identifier?.type?.coding?.version === ""
+          ? delete identifier.type.coding.version
+          : (removeUserSelected = false);
+        identifier?.type?.coding?.code === ""
+          ? delete identifier.type.coding.code
+          : (removeUserSelected = false);
+        identifier?.type?.coding?.display === ""
+          ? delete identifier.type.coding.display
+          : (removeUserSelected = false);
+        removeUserSelected === true
+          ? delete identifier.type.coding.userSelected
+          : "";
+        identifier?.type?.text === "" ? delete identifier.type.text : "";
+        Object.values(identifier?.type?.coding).length === 0
+          ? delete identifier.type.coding
+          : "";
+        Object.values(identifier?.type).length === 0
+          ? delete identifier.type
+          : "";
+        Object.values(identifier).length > 0 ? clearedId.push(identifier) : "";
+      });
+      jsonObject.identifier = clearedId;
+    }
+    if (jsonObject?.identifier?.length === 0) {
+      delete jsonObject.identifier;
+    }
+    return jsonObject;
   },
 };
 

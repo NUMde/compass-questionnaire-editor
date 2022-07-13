@@ -8,8 +8,22 @@
     "linkId": "Link ID",
     "navigationBar": {
       "version": "Version",
+      "metaInformation":"Metadata",
+      "metadataItems":{
+        "identifier":"Identifier",
+        "URL":"URL",
+        "name":"Name",
+        "title":"Title",
+        "date":"Date",
+        "status":"Status",
+        "publisher":"Publisher",
+        "approvalDate": "Approval Date",
+        "lastReviewDate": "Last Review Date",
+        "experimental": "Experimental"
+      },
       "ImportJSONBtn": "Import JSON",
       "ExportJSONBtn": "Export JSON",
+      "createNewQRE":"Create new questionnaire",
       "warningLeaveDialog": {
         "title": "Warning",
         "instructions": "Are you sure that you want to leave the edition questionnaire screen without exporting first?",
@@ -49,6 +63,13 @@
       "addAnswer": "ADD ANSWER",
       "reverseText": "Reverse Original Text",
       "newUUID": "New UUID",
+      "maxLength":"MaxLength",
+      "sliderStepValue": "Slider Step Value",
+      "minValue": "Min Value",
+      "lowRangeLabel": "Low Range Label",
+      "maxValue": "Max Value",
+      "highRangeLabel": "High Range Label",
+      "extensions": "Extensions",
       "UUID": "UUID",
       "regenerateUUID": "Regenerate UUID",
       "showQuestionContidions": "Show Item Conditions",
@@ -59,6 +80,45 @@
         "choice": "Choice",
         "open": "Open",
         "boolean": "Boolean"
+      }
+    },
+    "tabsTitles":{
+      "ediorQRE": "Questionnaire Editor",
+      "metadata": "Metadata",
+      "settings": "Settings"
+    },
+    "tabs":{
+      "metadata":{
+        "addNewId":"Add new Identifier",
+        "removeId": "Remove ID",
+        "use":"Use",
+        "system":"System",
+        "value":"Value",
+        "period":{
+          "period":"Period",
+          "start":"Start",
+          "end": "End"
+        },
+        "type":{
+          "type":"Type",
+          "coding":{
+            "coding":"Coding",
+            "system":"System",
+            "version":"Version",
+            "code":"Code",
+            "display":"Display",
+            "userSelected":"User Selected"
+          },
+          "text":"Text"
+        }
+      },
+      "settings":{
+       "Answers":{
+        "title":"Answers",
+        "AnswerValueset":"Answer Value Set",
+        "OpenChoice":"Open Choice Enabled",
+        "Choice":"Choice Enabled"
+       }
       }
     }
   },

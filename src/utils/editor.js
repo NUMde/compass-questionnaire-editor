@@ -143,7 +143,6 @@ const edtiorTools = {
 
   disableEntireItemQuestion(id, rootItem) {
     let oItemQuestionTodisabled = this.getCurrentQuestionNodeByID(id, rootItem);
-    //console.log("disable Entire Item Question:", oItemQuestionTodisabled);
 
     if (Object.entries(oItemQuestionTodisabled).length === 0) {
       return;
@@ -219,6 +218,31 @@ const edtiorTools = {
       item.__OldAnswerValueSet = item.answerValueSet = "";
       item.__answerValueSetCheck = false;
     }
+    if(typeQuestion === this.questionTypes.integer){
+      item.extensions = [
+        {
+          url: "http://hl7.org/fhir/StructureDefinition/questionnaire-sliderStepValue",
+          valueInteger: null,
+        },
+        {
+          url: "http://hl7.org/fhir/StructureDefinition/minValue",
+          valueInteger: null,
+        },
+        {
+          url: "https://num-compass.science/fhir/StructureDefinition/LowRangeLabel",
+          valueString: "",
+        },
+        {
+          url: "http://hl7.org/fhir/StructureDefinition/maxValue",
+          valueInteger: null,
+        },
+        {
+          url: "https://num-compass.science/fhir/StructureDefinition/HighRangeLabel",
+          valueString: "",
+        },
+      ];
+    }
+
     return item;
   },
   getIndexAnswer(internalIDToBeRemove, arrayAnswers) {
@@ -250,9 +274,6 @@ const edtiorTools = {
             if (this.currentLevel >= this.level) {
               this.level = this.currentLevel;
             }
-            //console.log("level :", this.level);
-            //console.log("currentLevel :", this.currentLevel);
-            //console.log("linkId :", element.linkId);
             this.getDeepLevel(element.item);
             this.currentLevel = 1;
           }

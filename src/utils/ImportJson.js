@@ -41,6 +41,7 @@ const FHIRValidations = {
     this.errorMessages = [];
     this.questionnaire = this.getSortItems(JSONFHIRQuestionnaire);
     this.statusNode(this.questionnaire);
+    this.identifier(this.questionnaire);
     this.itemsNode(this.questionnaire.item);
   },
   setConditionDependence(item = []) {
@@ -227,7 +228,6 @@ const FHIRValidations = {
       item.__newDefinition = false;
     }
   },
-
   validateItems(item) {
     if (item.item) {
       let idCount = 0;
@@ -272,7 +272,8 @@ const FHIRValidations = {
       item.type !== "date" &&
       item.type !== "open-choice" &&
       item.type !== "integer" &&
-      item.type !== "decimal"
+      item.type !== "decimal" &&
+      item.type !== "display"
     ) {
       this.errorMessages.push(
         this.i18n.global.t(
@@ -286,6 +287,45 @@ const FHIRValidations = {
     }
     if (item.enableWhen) {
       this.validateEnableWhen(item);
+    }
+
+    if(item.type === "integer"){
+      item.extensions = item.extensions || [];     
+
+      if(!item.extensions.some(x => x.url === "http://hl7.org/fhir/StructureDefinition/questionnaire-sliderStepValue")){
+        item.extensions.splice(0, 0, {
+          url: "http://hl7.org/fhir/StructureDefinition/questionnaire-sliderStepValue",
+          valueInteger: null,
+        });
+      }
+
+      if(!item.extensions.some(x => x.url === "http://hl7.org/fhir/StructureDefinition/minValue")){
+        item.extensions.splice(1, 0, {
+          url: "http://hl7.org/fhir/StructureDefinition/minValue",
+          valueInteger: null,
+        });
+      }
+
+      if(!item.extensions.some(x => x.url === "https://num-compass.science/fhir/StructureDefinition/HighRangeLabel")){
+        item.extensions.splice(2, 0, {
+          url: "https://num-compass.science/fhir/StructureDefinition/HighRangeLabel",
+          valueString: "",
+        });
+      }
+
+      if(!item.extensions.some(x => x.url === "http://hl7.org/fhir/StructureDefinition/maxValue")){
+        item.extensions.splice(3, 0, {
+          url: "http://hl7.org/fhir/StructureDefinition/maxValue",
+          valueInteger: null,
+        });
+      }
+
+      if(!item.extensions.some(x => x.url === "https://num-compass.science/fhir/StructureDefinition/HighRangeLabel")){
+        item.extensions.splice(4, 0, {
+          url: "https://num-compass.science/fhir/StructureDefinition/HighRangeLabel",
+          valueString: "",
+        });
+      }
     }
   },
   addPropertiesNeededtoGUIItemNode(item) {
@@ -395,6 +435,32 @@ const FHIRValidations = {
           node: "status",
         })
       );
+    }
+  },
+  identifier(FHIRobj) {
+    if (FHIRobj?.identifier?.length > 0) {
+      FHIRobj.identifier.forEach((id) => {
+        id.use = id.use === undefined ? "" : id.use;
+        id.system = id.system === undefined ? "" : id.system;
+        id.value = id.value === undefined ? "" : id.value;
+        id.period =
+          id.period === undefined ? { start: "", end: "" } : id.period;
+        id.type =
+          id.type === undefined
+            ? {
+                coding: {
+                  system: "",
+                  version: "",
+                  code: "",
+                  display: "",
+                  userSelected: false,
+                },
+                text: "",
+              }
+            : id.type;
+      });
+    } else {
+      FHIRobj.identifier = [];
     }
   },
   resourceType(FHIRobj) {
