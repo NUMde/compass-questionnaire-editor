@@ -19,21 +19,22 @@ const exportJsonQuestionnaire = {
         this.getObjectWithouItemsDisables(element);
       }
 
-      if (element.extensions) {
-        var i = element.extensions.length;
+      if (element.extension) {
+        var i = element.extension.length;
         while (i--) {
           if (
-            (!element.extensions[i].valueInteger ||
-              element.extensions[i].valueInteger === null) &&
-            (!element.extensions[i].valueString ||
-              element.extensions[i].valueString === "")
+            (!element.extension[i].valueInteger ||
+              element.extension[i].valueInteger === null) &&
+            (!element.extension[i].valueString ||
+              element.extension[i].valueString === "") &&
+            !element.extension[i].valueCoding
           ) {
-            element.extensions.splice(i, 1);
+            element.extension.splice(i, 1);
           }
         }
 
-        if (element.extensions.length === 0) {
-          delete element.extensions;
+        if (element.extension.length === 0) {
+          delete element.extension;
         }
       }
 

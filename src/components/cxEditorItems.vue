@@ -43,7 +43,7 @@
                 >
                   <div
                     class="row items-center"
-                    style="max-width: 230px; min-width: 150px"
+                    style=" min-width: 150px"
                   >
                     <q-icon
                       :name="prop.node.__icon"
@@ -59,7 +59,7 @@
                   </div>
                   <div
                     class="row items-center justify-end"
-                    style="width: 130px"
+                    style="width: 160px"
                   >
                     <!-- reverse original text question  -->
                     <div style="width: 30px">
@@ -81,6 +81,7 @@
                       >
                     </div>
                     <!-- enable/disable question  -->
+                    <q-badge label="GECCO" color="red" v-if="hasGeccoExtension(prop.node)"/>
                     <div v-if="!prop.node.disabled">
                       <q-toggle
                         size="xs"
@@ -153,6 +154,14 @@
                   :icon="questionTypeIcon.icon"
                   :label="questionTypeIcon.label"
                 />
+                <q-fab-action
+                    key="Import GECCO item..."
+                    label-position="right"
+                    color="red"
+                    @click="onAddGECCOQuestion"
+                    icon="coronavirus"
+                    label="gecco-item"
+                />
               </q-fab>
             </q-page-sticky>
           </div>
@@ -219,13 +228,15 @@
                 >{{ selectedItem.linkId
                 }}<q-tooltip> {{ $t("components.linkId") }} </q-tooltip></span
               >
+            </div>
+            <div class="row items-center justify-between text-bold text-h5 q-mb-md">
               <!-- UUID -->
               <q-input
                 :disable="!selectedItem.__active"
                 v-model="selectedItem.definition"
                 :label="$t('views.editor.UUID')"
                 dense
-                class="col-6"
+                class="col-8"
               >
                 <template v-slot:after>
                   <q-btn
@@ -241,6 +252,20 @@
                   >
                 </template>
               </q-input>
+            </div>
+            <div class="row items-center justify-between text-bold text-h5 q-mb-md"      v-if="hasGeccoExtension(selectedItem)">
+              <q-input
+                  :model-value="getGeccoExtensionValue(selectedItem)"
+                  label="GECCO-Mapping"
+                  disable
+                  dense
+                  class="col-8"
+                  color="black"
+              >
+              </q-input>
+            </div>
+            <div class="row items-center justify-between text-bold text-h5 q-mb-md">
+
               <!-- Max Length-->
               <q-input
                 v-if="selectedItem.type === 'string'"
@@ -510,7 +535,7 @@
                                 v-if="answerOption.__type === 'coding'"
                               >
                                 <q-input
-                                  :disable="!selectedItem.__active"
+                                  :disable="!selectedItem.__active || hasGeccoExtension(selectedItem)"
                                   :label="$t('views.editor.code')"
                                   outlined
                                   dense
@@ -518,7 +543,7 @@
                                   v-model="answerOption.valueCoding.code"
                                 ></q-input
                                 ><q-input
-                                  :disable="!selectedItem.__active"
+                                  :disable="!selectedItem.__active || hasGeccoExtension(selectedItem)"
                                   :label="$t('views.editor.system')"
                                   outlined
                                   dense
@@ -533,7 +558,7 @@
                                   round
                                   color="grey-6"
                                   icon="highlight_off"
-                                  :disable="!selectedItem.__active"
+                                  :disable="!selectedItem.__active  || hasGeccoExtension(selectedItem)"
                                   @click="onRemoveAnswer(answerOption)"
                                   ><q-tooltip>
                                     {{ $t("components.remove") }}
@@ -560,14 +585,19 @@
                         color="primary"
                         v-if="!selectedItem.__answerValueSetCheck"
                       >
-                        <q-fab-action
-                          v-for="answerType in answerTypeButton"
-                          :key="answerType.name"
-                          color="primary"
-                          :icon="answerType.icon"
-                          :label="answerType.label"
-                          @click="onClickAddAnswer(answerType)"
-                        />
+                        <template v-if="!hasGeccoExtension(selectedItem)">
+                          <q-fab-action
+                              v-for="answerType in answerTypeButton"
+                              :key="answerType.name"
+                              color="primary"
+                              :icon="answerType.icon"
+                              :label="answerType.label"
+                              @click="onClickAddAnswer(answerType)"
+                          />
+                        </template>
+                        <template v-else>
+                          <q-fab-action label="Not available for GECCO items" disable></q-fab-action>
+                        </template>
                       </q-fab>
                       <!--</q-page-sticky> -->
                     </div>
@@ -738,7 +768,7 @@
                           dense
                           type="number"
                           @keypress="onlyNumber"
-                          v-model="selectedItem.extensions[0].valueInteger"
+                          v-model="selectedItem.extension[0].valueInteger"
                         ></q-input>
                       </q-card-section>
                     </q-item-section>
@@ -751,7 +781,7 @@
                           dense
                           type="number"
                           @keypress="onlyNumber"
-                          v-model="selectedItem.extensions[1].valueInteger"
+                          v-model="selectedItem.extension[1].valueInteger"
                         ></q-input>
                       </q-card-section>
                     </q-item-section>
@@ -762,7 +792,7 @@
                           :disable="!selectedItem.__active"
                           :label="$t('views.editor.lowRangeLabel')"
                           dense
-                          v-model="selectedItem.extensions[2].valueString"
+                          v-model="selectedItem.extension[2].valueString"
                         ></q-input>
                       </q-card-section>
                     </q-item-section>
@@ -775,7 +805,7 @@
                           dense
                           type="number"
                           @keypress="onlyNumber"
-                          v-model="selectedItem.extensions[3].valueInteger"
+                          v-model="selectedItem.extension[3].valueInteger"
                         ></q-input>
                       </q-card-section>
                     </q-item-section>
@@ -786,7 +816,7 @@
                           :disable="!selectedItem.__active"
                           :label="$t('views.editor.highRangeLabel')"
                           dense
-                          v-model="selectedItem.extensions[4].valueString"
+                          v-model="selectedItem.extension[4].valueString"
                         ></q-input>
                       </q-card-section>
                     </q-item-section>
@@ -846,13 +876,18 @@
       </q-card>
     </q-dialog>
     <!-- Condition Item Dialog -->
-    <q-dialog v-model="layout"
-      ><cx-enable-When
+    <q-dialog v-model="layout">
+      <cx-enable-When
         :internalID="selected"
         v-on:choiceQuestion="onSelectedQuestionsAnswer"
-        v-on:question="onSelectedQuestion"
-      ></cx-enable-When
-    ></q-dialog>
+        v-on:question="onSelectedQuestion">
+      </cx-enable-When>
+    </q-dialog>
+    <q-dialog v-model="layout2">
+      <cx-add-gecco-item
+        v-on:question="onSelectedGECCOQuestion">
+      </cx-add-gecco-item>
+    </q-dialog>
   </div>
 </template>
 <script>
@@ -869,8 +904,10 @@ import { edtiorTools } from "../utils/editor.js";
 import { mapGetters } from "vuex";
 import { v4 as uuidv4 } from "uuid";
 import cxEnableWhen from "../components/cxEnableWhen.vue";
+import CxAddGeccoItem from "@/components/cxAddGeccoItem";
 export default {
   components: {
+    CxAddGeccoItem,
     cxEnableWhen,
   },
   setup() {
@@ -883,6 +920,7 @@ export default {
         });
       },
       layout: ref(false),
+      layout2: ref(false),
       alert: ref(false),
       itemsAnwers: ref(""),
       edtiorTools,
@@ -979,6 +1017,29 @@ export default {
       this.enableWhenItem.answer = "";
       this.enableWhenItem.type = e.type;
       this.layout = false;
+    },
+    onSelectedGECCOQuestion(item) {
+      this.layout2 = false;
+      item = JSON.parse(JSON.stringify(item)) //create copy
+      if (this.selected !== null) {
+        // only add questions in items type group
+        if (this.selectedItem.__icon !== "article") return;
+        if (this.selectedItem.item) {
+          const lastItem = this.selectedItem.item.slice(-1)[0];
+          item.__linkId = this.edtiorTools.getNextID(lastItem.__linkId);
+          item.linkId = this.edtiorTools.getNextID(lastItem.linkId);
+        } else {
+          this.selectedItem.item = [];
+          item.__linkId = this.selected + "." + 1;
+          item.linkId = item.__linkId;
+        }
+        this.selectedItem.item.push(item);
+      } else {
+        item.__linkId = this.item.length + 1 + "";
+        this.item.push(item);
+      }
+      this.edtiorTools.regenerateLinkIds(this.item);
+
     },
     onAddCondition() {
       if (this.selectedItem.enableWhen === undefined) {
@@ -1176,16 +1237,24 @@ export default {
       }
       this.edtiorTools.regenerateLinkIds(this.item);
     },
+    onAddGECCOQuestion(e) {
+      //No Add Question on Items disabled
+      if (this.selectedItem && this.selectedItem.__active === false) return;
+      //No allow add question more than 5 levels
+      if (this.selectedItem?.linkId?.split(".").length >= 4 && e.name === this.questionTypes.group)
+        return;
+      this.layout2 = true;
+    },
     onClickAddAnswerOpenChiose(e) {
       //only choise answer are allowed to open-choise questions
       let answerOption = {};
-      if (e.type == "choice") {
+      if (e.type === "choice") {
         answerOption = this.edtiorTools.getNewAnswerValueCoding(
           { text: "", type: e.type },
           this.selectedItem.answerOption,
         );
       }
-      if (e.type == "open-choice") {
+      if (e.type === "open-choice") {
         answerOption = this.edtiorTools.getNewAnswerValueString(
           { text: "Answer", type: e.type },
           this.selectedItem.answerOption,
@@ -1195,6 +1264,13 @@ export default {
         this.selectedItem.answerOption = [];
       }
       this.selectedItem.answerOption.push(answerOption);
+    },
+    hasGeccoExtension(e) {
+      return e.extension && e.extension.some(it => it.url==="https://num-compass.science/fhir/StructureDefinition/CompassGeccoItem")
+    },
+    getGeccoExtensionValue(e) {
+      let extension = e.extension?.find(it => it.url==="https://num-compass.science/fhir/StructureDefinition/CompassGeccoItem")
+      return extension?.valueCoding?.code
     },
     onClickAddAnswer(e) {
       const that = this;
@@ -1240,6 +1316,7 @@ export default {
   computed: {
     ...mapGetters([
       "getQuestionnaireImportedJSON",
+      "getQuestionnaireGECCO",
       "getAnswerValueSet",
       "getOpenChoice",
       "getChoice",
