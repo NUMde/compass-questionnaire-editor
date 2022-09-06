@@ -33,7 +33,7 @@
                 ></div>
                 <div
                   class="row items-center justify-between"
-                  style="width: 100%; flex-wrap:nowrap"
+                  style="width: 100%; flex-wrap: nowrap"
                   @dragover="onDragOver"
                   @dragleave="onDragLeave"
                   @drop="onDrop"
@@ -41,10 +41,7 @@
                   :id="prop.node.__internalID"
                   draggable="true"
                 >
-                  <div
-                    class="row items-center"
-                    style=" min-width: 150px"
-                  >
+                  <div class="row items-center" style="min-width: 150px">
                     <q-icon
                       :name="prop.node.__icon"
                       size="15px"
@@ -59,7 +56,7 @@
                   </div>
                   <div
                     class="row items-center justify-end"
-                    style="width: 190px;min-width: 190px;"
+                    style="width: 190px; min-width: 190px"
                   >
                     <!-- reverse original text question  -->
                     <div style="width: 30px">
@@ -80,7 +77,11 @@
                         </q-tooltip></q-btn
                       >
                     </div>
-                    <q-badge label="GECCO" color="red" v-if="hasGeccoExtension(prop.node)"/>
+                    <q-badge
+                      label="GECCO"
+                      color="red"
+                      v-if="hasGeccoExtension(prop.node)"
+                    />
                     <div v-if="!prop.node.disabled">
                       <q-toggle
                         size="xs"
@@ -98,16 +99,17 @@
                     </div>
                     <div style="width: 30px">
                       <q-btn
-                          flat
-                          round
-                          size="xs"
-                          icon="delete"
-                          class="q-mr-sm text-grey-8"
-                          @click="deleteItem(prop)"
+                        flat
+                        round
+                        size="xs"
+                        icon="delete"
+                        class="q-mr-sm text-grey-8"
+                        @click="deleteItem(prop)"
                       >
-                        <q-tooltip>{{ $t("views.editor.deleteItem") }}</q-tooltip>
-                      </q-btn
-                      >
+                        <q-tooltip>{{
+                          $t("views.editor.deleteItem")
+                        }}</q-tooltip>
+                      </q-btn>
                     </div>
                     <div class="q-body-1">
                       <q-icon
@@ -167,12 +169,12 @@
                   :label="questionTypeIcon.label"
                 />
                 <q-fab-action
-                    key="Import GECCO item..."
-                    label-position="right"
-                    color="red"
-                    @click="onAddGECCOQuestion"
-                    icon="coronavirus"
-                    label="Import GECCO item(s)..."
+                  key="Import GECCO item..."
+                  label-position="right"
+                  color="red"
+                  @click="onAddGECCOQuestion"
+                  icon="coronavirus"
+                  label="Import GECCO item(s)..."
                 />
               </q-fab>
             </q-page-sticky>
@@ -241,7 +243,9 @@
                 }}<q-tooltip> {{ $t("components.linkId") }} </q-tooltip></span
               >
             </div>
-            <div class="row items-center justify-between text-bold text-h5 q-mb-md">
+            <div
+              class="row items-center justify-between text-bold text-h5 q-mb-md"
+            >
               <!-- UUID -->
               <q-input
                 :disable="!selectedItem.__active"
@@ -265,19 +269,23 @@
                 </template>
               </q-input>
             </div>
-            <div class="row items-center justify-between text-bold text-h5 q-mb-md"      v-if="hasGeccoExtension(selectedItem)">
+            <div
+              class="row items-center justify-between text-bold text-h5 q-mb-md"
+              v-if="hasGeccoExtension(selectedItem)"
+            >
               <q-input
-                  :model-value="getGeccoExtensionValue(selectedItem)"
-                  label="GECCO-Mapping"
-                  disable
-                  dense
-                  class="col-8"
-                  color="black"
+                :model-value="getGeccoExtensionValue(selectedItem)"
+                label="GECCO-Mapping"
+                disable
+                dense
+                class="col-8"
+                color="black"
               >
               </q-input>
             </div>
-            <div class="row items-center justify-between text-bold text-h5 q-mb-md">
-
+            <div
+              class="row items-center justify-between text-bold text-h5 q-mb-md"
+            >
               <!-- Max Length-->
               <q-input
                 v-if="selectedItem.type === 'string'"
@@ -547,7 +555,10 @@
                                 v-if="answerOption.__type === 'coding'"
                               >
                                 <q-input
-                                  :disable="!selectedItem.__active || hasGeccoExtension(selectedItem)"
+                                  :disable="
+                                    !selectedItem.__active ||
+                                    hasGeccoExtension(selectedItem)
+                                  "
                                   :label="$t('views.editor.code')"
                                   outlined
                                   dense
@@ -555,7 +566,10 @@
                                   v-model="answerOption.valueCoding.code"
                                 ></q-input
                                 ><q-input
-                                  :disable="!selectedItem.__active || hasGeccoExtension(selectedItem)"
+                                  :disable="
+                                    !selectedItem.__active ||
+                                    hasGeccoExtension(selectedItem)
+                                  "
                                   :label="$t('views.editor.system')"
                                   outlined
                                   dense
@@ -570,7 +584,10 @@
                                   round
                                   color="grey-6"
                                   icon="highlight_off"
-                                  :disable="!selectedItem.__active  || hasGeccoExtension(selectedItem)"
+                                  :disable="
+                                    !selectedItem.__active ||
+                                    hasGeccoExtension(selectedItem)
+                                  "
                                   @click="onRemoveAnswer(answerOption)"
                                   ><q-tooltip>
                                     {{ $t("components.remove") }}
@@ -599,16 +616,19 @@
                       >
                         <template v-if="!hasGeccoExtension(selectedItem)">
                           <q-fab-action
-                              v-for="answerType in answerTypeButton"
-                              :key="answerType.name"
-                              color="primary"
-                              :icon="answerType.icon"
-                              :label="answerType.label"
-                              @click="onClickAddAnswer(answerType)"
+                            v-for="answerType in answerTypeButton"
+                            :key="answerType.name"
+                            color="primary"
+                            :icon="answerType.icon"
+                            :label="answerType.label"
+                            @click="onClickAddAnswer(answerType)"
                           />
                         </template>
                         <template v-else>
-                          <q-fab-action label="Not available for GECCO items" disable></q-fab-action>
+                          <q-fab-action
+                            label="Not available for GECCO items"
+                            disable
+                          ></q-fab-action>
                         </template>
                       </q-fab>
                       <!--</q-page-sticky> -->
@@ -892,12 +912,12 @@
       <cx-enable-When
         :internalID="selected"
         v-on:choiceQuestion="onSelectedQuestionsAnswer"
-        v-on:question="onSelectedQuestion">
+        v-on:question="onSelectedQuestion"
+      >
       </cx-enable-When>
     </q-dialog>
     <q-dialog v-model="layout2">
-      <cx-add-gecco-item
-        v-on:question="onSelectedGECCOQuestion">
+      <cx-add-gecco-item v-on:question="onSelectedGECCOQuestion">
       </cx-add-gecco-item>
     </q-dialog>
   </div>
@@ -935,7 +955,7 @@ export default {
       layout2: ref(false),
       alert: ref(false),
       itemsAnwers: ref(""),
-      edtiorTools: editorTools,
+      editorTools: editorTools,
       questionTypesIcons,
       questionTypes,
       answerType,
@@ -976,7 +996,7 @@ export default {
         //no value Item to go
         return;
       }
-      const itemSelected = this.edtiorTools.getCurrentQuestionNodeByLinkId(
+      const itemSelected = this.editorTools.getCurrentQuestionNodeByLinkId(
         $event,
         this.item,
       );
@@ -1032,14 +1052,14 @@ export default {
     },
     onSelectedGECCOQuestion(item) {
       this.layout2 = false;
-      item = JSON.parse(JSON.stringify(item)) //create copy
+      item = JSON.parse(JSON.stringify(item)); //create copy
       if (this.selected !== null) {
         // only add questions in items type group
         if (this.selectedItem.__icon !== "article") return;
         if (this.selectedItem.item) {
           const lastItem = this.selectedItem.item.slice(-1)[0];
-          item.__linkId = this.edtiorTools.getNextID(lastItem.__linkId);
-          item.linkId = this.edtiorTools.getNextID(lastItem.linkId);
+          item.__linkId = this.editorTools.getNextID(lastItem.__linkId);
+          item.linkId = this.editorTools.getNextID(lastItem.linkId);
         } else {
           this.selectedItem.item = [];
           item.__linkId = this.selected + "." + 1;
@@ -1050,8 +1070,7 @@ export default {
         item.__linkId = this.item.length + 1 + "";
         this.item.push(item);
       }
-      this.edtiorTools.regenerateLinkIds(this.item);
-
+      this.editorTools.regenerateLinkIds(this.item);
     },
     onAddCondition() {
       if (this.selectedItem.enableWhen === undefined) {
@@ -1099,7 +1118,7 @@ export default {
       e.currentTarget.style.cursor = "default";
       const draggedId = e.dataTransfer.getData("text");
 
-      const itemSource = this.edtiorTools.getCurrentQuestionNodeByID(
+      const itemSource = this.editorTools.getCurrentQuestionNodeByID(
         draggedId,
         this.item,
       );
@@ -1109,11 +1128,11 @@ export default {
         return;
       }
 
-      const internalIDTarget = this.edtiorTools.getInternalIDFromEhandler(e);
+      const internalIDTarget = this.editorTools.getInternalIDFromEhandler(e);
 
       if (draggedId === internalIDTarget) return; //No allow drag it in same Item
 
-      const itemTarget = this.edtiorTools.getCurrentQuestionNodeByID(
+      const itemTarget = this.editorTools.getCurrentQuestionNodeByID(
         internalIDTarget,
         this.item,
       );
@@ -1123,7 +1142,7 @@ export default {
       }
 
       //check if source Item Is the parent for target-> Not Allow
-      const itemNodeChild = this.edtiorTools.getCurrentQuestionNodeByID(
+      const itemNodeChild = this.editorTools.getCurrentQuestionNodeByID(
         itemTarget.__internalID,
         itemSource.item,
       );
@@ -1136,30 +1155,30 @@ export default {
         return;
       }
 
-      if (!itemTarget.__active && !this.edtiorTools.isPreviousQuestion(e)) {
+      if (!itemTarget.__active && !this.editorTools.isPreviousQuestion(e)) {
         return; //No allow  drag it in items inactives
       }
 
       if (
         itemTarget.__icon !== "article" &&
-        !this.edtiorTools.isPreviousQuestion(e)
+        !this.editorTools.isPreviousQuestion(e)
       ) {
         return; //only question can be drag in group questions
       }
 
-      const aitemParentSource = this.edtiorTools.getArraySource(
+      const aitemParentSource = this.editorTools.getArraySource(
         draggedId,
         this.item,
       );
 
-      const itemToBeMoved = this.edtiorTools.getCurrentQuestionNodeByID(
+      const itemToBeMoved = this.editorTools.getCurrentQuestionNodeByID(
         draggedId,
         this.item,
       );
 
       if (itemToBeMoved.item) {
         //no allow more than 5 levels of items, nested Items
-        let numLevel = this.edtiorTools.getNumbersMaxOfLevels(
+        let numLevel = this.editorTools.getNumbersMaxOfLevels(
           itemToBeMoved.item,
         );
         numLevel++; //count parent
@@ -1176,17 +1195,17 @@ export default {
         return; //no allow more than 5 levels of items
       }
 
-      const aitemParentTarget = this.edtiorTools.getArraySource(
+      const aitemParentTarget = this.editorTools.getArraySource(
         internalIDTarget,
         this.item,
       );
 
-      const indexOfItemtoBeInsert = this.edtiorTools.getIndexItem(
+      const indexOfItemtoBeInsert = this.editorTools.getIndexItem(
         internalIDTarget,
         aitemParentTarget,
       );
 
-      let indexOfItemtoBeRemoved = this.edtiorTools.getIndexItem(
+      let indexOfItemtoBeRemoved = this.editorTools.getIndexItem(
         draggedId,
         aitemParentSource,
       );
@@ -1208,12 +1227,12 @@ export default {
         }
       }
       aitemParentSource.splice(indexOfItemtoBeRemoved, 1);
-      this.edtiorTools.regenerateLinkIds(this.item);
-      this.edtiorTools.regenerateInternalIDs(this.item);
+      this.editorTools.regenerateLinkIds(this.item);
+      this.editorTools.regenerateInternalIDs(this.item);
     },
     onToggle(id) {
-      this.edtiorTools.disableEntireItemQuestion(id, this.item);
-      this.edtiorTools.regenerateLinkIds(this.item);
+      this.editorTools.disableEntireItemQuestion(id, this.item);
+      this.editorTools.regenerateLinkIds(this.item);
     },
     onAddQuestion(e) {
       //No Add Question on Items disabled
@@ -1228,15 +1247,15 @@ export default {
         e.name === this.questionTypes.group
       )
         return;
-      const item = this.edtiorTools.getTypeObjQuestion(e.name);
+      const item = this.editorTools.getTypeObjQuestion(e.name);
       item.text = this.$t("views.editor.newQuestion");
       if (this.selected !== null) {
         //only add questions in items type group
         if (this.selectedItem.__icon !== "article") return;
         if (this.selectedItem.item) {
           const lastItem = this.selectedItem.item.slice(-1)[0];
-          item.__linkId = this.edtiorTools.getNextID(lastItem.__linkId);
-          item.linkId = this.edtiorTools.getNextID(lastItem.linkId);
+          item.__linkId = this.editorTools.getNextID(lastItem.__linkId);
+          item.linkId = this.editorTools.getNextID(lastItem.linkId);
         } else {
           this.selectedItem.item = [];
           item.__linkId = this.selected + "." + 1;
@@ -1247,13 +1266,16 @@ export default {
         item.__linkId = this.item.length + 1 + "";
         this.item.push(item);
       }
-      this.edtiorTools.regenerateLinkIds(this.item);
+      this.editorTools.regenerateLinkIds(this.item);
     },
     onAddGECCOQuestion(e) {
       //No Add Question on Items disabled
       if (this.selectedItem && this.selectedItem.__active === false) return;
       //No allow add question more than 5 levels
-      if (this.selectedItem?.linkId?.split(".").length >= 4 && e.name === this.questionTypes.group)
+      if (
+        this.selectedItem?.linkId?.split(".").length >= 4 &&
+        e.name === this.questionTypes.group
+      )
         return;
       this.layout2 = true;
     },
@@ -1261,13 +1283,13 @@ export default {
       //only choise answer are allowed to open-choise questions
       let answerOption = {};
       if (e.type === "choice") {
-        answerOption = this.edtiorTools.getNewAnswerValueCoding(
+        answerOption = this.editorTools.getNewAnswerValueCoding(
           { text: "", type: e.type },
           this.selectedItem.answerOption,
         );
       }
       if (e.type === "open-choice") {
-        answerOption = this.edtiorTools.getNewAnswerValueString(
+        answerOption = this.editorTools.getNewAnswerValueString(
           { text: "Answer", type: e.type },
           this.selectedItem.answerOption,
         );
@@ -1278,10 +1300,21 @@ export default {
       this.selectedItem.answerOption.push(answerOption);
     },
     hasGeccoExtension(e) {
-      return e.extension && e.extension.some(it => it.url==="https://num-compass.science/fhir/StructureDefinition/CompassGeccoItem")
+      return (
+        e.extension &&
+        e.extension.some(
+          (it) =>
+            it.url ===
+            "https://num-compass.science/fhir/StructureDefinition/CompassGeccoItem",
+        )
+      );
     },
     getGeccoExtensionValue(e) {
-      let extension = e.extension?.find(it => it.url==="https://num-compass.science/fhir/StructureDefinition/CompassGeccoItem")
+      let extension = e.extension?.find(
+        (it) =>
+          it.url ===
+          "https://num-compass.science/fhir/StructureDefinition/CompassGeccoItem",
+      );
       return extension?.valueCoding?.code;
     },
     onClickAddAnswer(e) {
@@ -1293,7 +1326,7 @@ export default {
       }
 
       if (e.name === "coding") {
-        newItemAnswer = this.edtiorTools.getNewAnswerValueCoding(
+        newItemAnswer = this.editorTools.getNewAnswerValueCoding(
           { text: "", type: that.selectedItem.type },
           this.selectedItem.answerOption,
         );
@@ -1325,22 +1358,24 @@ export default {
       this.selectedItem.answerOption.splice(indexOfItemtoBeRemoved, 1);
     },
     deleteItem(item) {
-      let answer = confirm("Do you really want to delete this item and all of its child items?");
+      let answer = confirm(
+        "Do you really want to delete this item and all of its child items?",
+      );
       if (answer) {
         this.deleteItemRecursivly(this.item, item.key);
-        this.editorTools.regenerateLinkIds(this.item);
       }
+      this.editorTools.regenerateLinkIds(this.item);
+      this.editorTools.regenerateInternalIDs(this.item);
     },
-    deleteItemRecursivly(itemlist, key){
-        for (let idx in itemlist) {
-          console.log("\""+itemlist[idx].__internalID+"\" => \""+key+"\"")
-          if(itemlist[idx].__internalID === key) {
-            itemlist.splice(idx, 1);
-            return
-          } else if (itemlist[idx].item) {
-              this.deleteItemRecursivly(itemlist[idx].item, key);
-            }
+    deleteItemRecursivly(itemlist, key) {
+      for (let idx in itemlist) {
+        if (itemlist[idx].__internalID === key) {
+          itemlist.splice(idx, 1);
+          return;
+        } else if (itemlist[idx].item) {
+          this.deleteItemRecursivly(itemlist[idx].item, key);
         }
+      }
     },
   },
   computed: {
@@ -1394,13 +1429,13 @@ export default {
   },
   watch: {
     selected(val) {
-      this.edtiorTools.removeCondionDependece(this.item);
-      this.edtiorTools.setConditionDependence(this.item, this.item);
+      this.editorTools.removeCondionDependece(this.item);
+      this.editorTools.setConditionDependence(this.item, this.item);
       if (val === null) {
         this.selectedItem = this.item.item;
         return;
       }
-      this.selectedItem = this.edtiorTools.getCurrentQuestionNodeByID(
+      this.selectedItem = this.editorTools.getCurrentQuestionNodeByID(
         val,
         this.item,
       );
@@ -1414,8 +1449,6 @@ export default {
         this.splitterModel = 35;
       }
     },
-
   },
-
 };
 </script>
