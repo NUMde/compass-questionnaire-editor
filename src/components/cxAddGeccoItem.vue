@@ -159,7 +159,7 @@
 <script>
 // import { mapGetters } from "vuex";
 import { ref } from "vue";
-import { edtiorTools } from "../utils/editor.js";
+import { editorTools } from "../utils/editor.js";
 import * as geccoQuestionnaire from "./../store/questionnaire.json"
 import {importJsonQuestionnaire} from "@/utils/ImportJson";
 
@@ -169,7 +169,7 @@ export default {
     const filter = ref("de");
     return {
       splitterModel: ref(50), // start at 50%
-      edtiorTools,
+      edtiorTools: editorTools,
       filter,
     };
   },
@@ -203,6 +203,11 @@ export default {
   },
   methods: {
     onSelectGECCOQuestion(questionSelected) {
+      if(questionSelected.extension?.find(it => it?.url === "https://num-compass.science/fhir/StructureDefinition/DependentItem")) {
+        alert("This item is dependent of another item. Please import the upper item group!")
+        return;
+      }
+
       this.$emit("question", questionSelected);
     },
 

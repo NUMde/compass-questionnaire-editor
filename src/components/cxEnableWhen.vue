@@ -182,7 +182,7 @@
 <script>
 import { mapGetters } from "vuex";
 import { ref } from "vue";
-import { edtiorTools } from "../utils/editor.js";
+import { editorTools } from "../utils/editor.js";
 export default {
   props: {
     internalID: {
@@ -194,7 +194,7 @@ export default {
     const filter = ref("de");
     return {
       splitterModel: ref(50), // start at 50%
-      edtiorTools,
+      edtiorTools: editorTools,
       filter,
     };
   },

@@ -49,6 +49,7 @@
       "itemConditions": "Conditions",
       "addNewCondition": "Add New Condition",
       "addItem": "New Item",
+      "deleteItem": "Delete Item",
       "question": "Question",
       "questions": "Questions",
       "operator": "Operator",

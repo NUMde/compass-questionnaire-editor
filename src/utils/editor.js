@@ -1,6 +1,6 @@
 import { questionTypesIcons, questionTypes, answerType } from "./constants.js";
 import { v4 as uuidv4 } from "uuid";
-const edtiorTools = {
+const editorTools = {
   currentQuestionNodeByID: {},
   currentQuestionNodeByLinkId: {},
   getIndexItem(internalIDToBeRemove, arrayQuestions) {
@@ -348,8 +348,8 @@ const edtiorTools = {
   },
 };
 
-edtiorTools.questionTypesIcons = questionTypesIcons;
-edtiorTools.questionTypes = questionTypes;
-edtiorTools.answerType = answerType;
+editorTools.questionTypesIcons = questionTypesIcons;
+editorTools.questionTypes = questionTypes;
+editorTools.answerType = answerType;
 
-export { edtiorTools };
+export { editorTools };

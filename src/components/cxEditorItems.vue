@@ -59,7 +59,7 @@
                   </div>
                   <div
                     class="row items-center justify-end"
-                    style="width: 160px;min-width: 160px;"
+                    style="width: 190px;min-width: 190px;"
                   >
                     <!-- reverse original text question  -->
                     <div style="width: 30px">
@@ -80,7 +80,6 @@
                         </q-tooltip></q-btn
                       >
                     </div>
-                    <!-- enable/disable question  -->
                     <q-badge label="GECCO" color="red" v-if="hasGeccoExtension(prop.node)"/>
                     <div v-if="!prop.node.disabled">
                       <q-toggle
@@ -95,6 +94,19 @@
                               : $t("views.editor.enableItem")
                           }}
                         </q-tooltip></q-toggle
+                      >
+                    </div>
+                    <div style="width: 30px">
+                      <q-btn
+                          flat
+                          round
+                          size="xs"
+                          icon="delete"
+                          class="q-mr-sm text-grey-8"
+                          @click="deleteItem(prop)"
+                      >
+                        <q-tooltip>{{ $t("views.editor.deleteItem") }}</q-tooltip>
+                      </q-btn
                       >
                     </div>
                     <div class="q-body-1">
@@ -160,7 +172,7 @@
                     color="red"
                     @click="onAddGECCOQuestion"
                     icon="coronavirus"
-                    label="gecco-item"
+                    label="Import GECCO item(s)..."
                 />
               </q-fab>
             </q-page-sticky>
@@ -900,7 +912,7 @@ import {
 } from "../utils/constants.js";
 import { useQuasar } from "quasar";
 import { ref } from "vue";
-import { edtiorTools } from "../utils/editor.js";
+import { editorTools } from "../utils/editor.js";
 import { mapGetters } from "vuex";
 import { v4 as uuidv4 } from "uuid";
 import cxEnableWhen from "../components/cxEnableWhen.vue";
@@ -923,7 +935,7 @@ export default {
       layout2: ref(false),
       alert: ref(false),
       itemsAnwers: ref(""),
-      edtiorTools,
+      edtiorTools: editorTools,
       questionTypesIcons,
       questionTypes,
       answerType,
@@ -1312,6 +1324,24 @@ export default {
       );
       this.selectedItem.answerOption.splice(indexOfItemtoBeRemoved, 1);
     },
+    deleteItem(item) {
+      let answer = confirm("Do you really want to delete this item and all of its child items?");
+      if (answer) {
+        this.deleteItemRecursivly(this.item, item.key);
+        this.editorTools.regenerateLinkIds(this.item);
+      }
+    },
+    deleteItemRecursivly(itemlist, key){
+        for (let idx in itemlist) {
+          console.log("\""+itemlist[idx].__internalID+"\" => \""+key+"\"")
+          if(itemlist[idx].__internalID === key) {
+            itemlist.splice(idx, 1);
+            return
+          } else if (itemlist[idx].item) {
+              this.deleteItemRecursivly(itemlist[idx].item, key);
+            }
+        }
+    },
   },
   computed: {
     ...mapGetters([
@@ -1384,6 +1414,8 @@ export default {
         this.splitterModel = 35;
       }
     },
+
   },
+
 };
 </script>

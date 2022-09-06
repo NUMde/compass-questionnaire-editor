@@ -4488,7 +4488,7 @@
             "valueCoding": {
               "system": "https://num-compass.science/fhir/CodeSystem/Covid19Vaccine",
               "code": "MODERNA",
-              "display": "COVID-19 Vaccine Moderna®"
+              "display": "Spikevax COVID-19 Vaccine Moderna®"
             }
           }, {
             "valueCoding": {
@@ -4590,7 +4590,7 @@
             "valueCoding": {
               "system": "https://num-compass.science/fhir/CodeSystem/Covid19Vaccine",
               "code": "MODERNA",
-              "display": "COVID-19 Vaccine Moderna®"
+              "display": "Spikevax COVID-19 Vaccine Moderna®"
             }
           }, {
             "valueCoding": {
@@ -4692,7 +4692,7 @@
             "valueCoding": {
               "system": "https://num-compass.science/fhir/CodeSystem/Covid19Vaccine",
               "code": "MODERNA",
-              "display": "COVID-19 Vaccine Moderna®"
+              "display": "Spikevax COVID-19 Vaccine Moderna®"
             }
           }, {
             "valueCoding": {
@@ -5821,6 +5821,9 @@
             "version": "1.0",
             "code": "symptoms.abdominalPain.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.1.2",
         "text": "Schweregrad?",
@@ -5948,6 +5951,9 @@
             "version": "1.0",
             "code": "symptoms.bleeding.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.3.2",
         "text": "Schweregrad?",
@@ -6041,6 +6047,9 @@
             "version": "1.0",
             "code": "symptoms.chestPain.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.4.2",
         "text": "Schweregrad?",
@@ -6134,6 +6143,9 @@
             "version": "1.0",
             "code": "symptoms.chill.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.5.2",
         "text": "Schweregrad?",
@@ -6227,6 +6239,9 @@
             "version": "1.0",
             "code": "symptoms.conjunctivis.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.6.2",
         "text": "Schweregrad?",
@@ -6320,6 +6335,9 @@
             "version": "1.0",
             "code": "symptoms.cough.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.7.2",
         "text": "Schweregrad?",
@@ -6413,6 +6431,9 @@
             "version": "1.0",
             "code": "symptoms.diarrhea.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.8.2",
         "text": "Schweregrad?",
@@ -6506,6 +6527,9 @@
             "version": "1.0",
             "code": "symptoms.disturbanceOfConsciousness.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.9.2",
         "text": "Schweregrad?",
@@ -6599,6 +6623,9 @@
             "version": "1.0",
             "code": "symptoms.dyspnea.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.10.2",
         "text": "Schweregrad?",
@@ -6692,6 +6719,9 @@
             "version": "1.0",
             "code": "symptoms.erruptionOfSkin.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.11.2",
         "text": "Schweregrad?",
@@ -6785,6 +6815,9 @@
             "version": "1.0",
             "code": "symptoms.fatigue.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.12.2",
         "text": "Schweregrad?",
@@ -6878,6 +6911,9 @@
             "version": "1.0",
             "code": "symptoms.feelingFeverish.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.13.2",
         "text": "Schweregrad?",
@@ -6971,6 +7007,9 @@
             "version": "1.0",
             "code": "symptoms.fever.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.14.2",
         "text": "Schweregrad?",
@@ -7064,6 +7103,9 @@
             "version": "1.0",
             "code": "symptoms.headache.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.15.2",
         "text": "Schweregrad?",
@@ -7157,6 +7199,9 @@
             "version": "1.0",
             "code": "symptoms.hemoptysis.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.16.2",
         "text": "Schweregrad?",
@@ -7250,6 +7295,9 @@
             "version": "1.0",
             "code": "symptoms.indrawingOfRibsDuringRespiration.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.17.2",
         "text": "Schweregrad?",
@@ -7343,6 +7391,9 @@
             "version": "1.0",
             "code": "symptoms.jointPain.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.18.2",
         "text": "Schweregrad?",
@@ -7436,6 +7487,9 @@
             "version": "1.0",
             "code": "symptoms.lossOfAppetite.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.19.2",
         "text": "Schweregrad?",
@@ -7529,6 +7583,9 @@
             "version": "1.0",
             "code": "symptoms.lossOfSenseOfSmell.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.20.2",
         "text": "Schweregrad?",
@@ -7622,6 +7679,9 @@
             "version": "1.0",
             "code": "symptoms.lossOfTaste.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.21.2",
         "text": "Schweregrad?",
@@ -7715,6 +7775,9 @@
             "version": "1.0",
             "code": "symptoms.lymphadenopathy.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.22.2",
         "text": "Schweregrad?",
@@ -7808,6 +7871,9 @@
             "version": "1.0",
             "code": "symptoms.malaise.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.23.2",
         "text": "Schweregrad?",
@@ -7901,6 +7967,9 @@
             "version": "1.0",
             "code": "symptoms.musclePain.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.24.2",
         "text": "Schweregrad?",
@@ -7994,6 +8063,9 @@
             "version": "1.0",
             "code": "symptoms.nasalCongestion.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.25.2",
         "text": "Schweregrad?",
@@ -8087,6 +8159,9 @@
             "version": "1.0",
             "code": "symptoms.nasalDischarge.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.26.2",
         "text": "Schweregrad?",
@@ -8180,6 +8255,9 @@
             "version": "1.0",
             "code": "symptoms.nausea.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.27.2",
         "text": "Schweregrad?",
@@ -8273,6 +8351,9 @@
             "version": "1.0",
             "code": "symptoms.painInThroat.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.28.2",
         "text": "Schweregrad?",
@@ -8366,6 +8447,9 @@
             "version": "1.0",
             "code": "symptoms.rigor.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.29.2",
         "text": "Schweregrad?",
@@ -8459,6 +8543,9 @@
             "version": "1.0",
             "code": "symptoms.seizure.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.30.2",
         "text": "Schweregrad?",
@@ -8552,6 +8639,9 @@
             "version": "1.0",
             "code": "symptoms.skinUlcer.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.31.2",
         "text": "Schweregrad?",
@@ -8645,6 +8735,9 @@
             "version": "1.0",
             "code": "symptoms.unableToWalk.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.32.2",
         "text": "Schweregrad?",
@@ -8738,6 +8831,9 @@
             "version": "1.0",
             "code": "symptoms.vomiting.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.33.2",
         "text": "Schweregrad?",
@@ -8831,6 +8927,9 @@
             "version": "1.0",
             "code": "symptoms.wheezing.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.34.2",
         "text": "Schweregrad?",
@@ -8924,6 +9023,9 @@
             "version": "1.0",
             "code": "symptoms.feverGreaterThan38.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.35.2",
         "text": "Schweregrad?",
@@ -9017,6 +9119,9 @@
             "version": "1.0",
             "code": "symptoms.asthenia.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.36.2",
         "text": "Schweregrad?",
@@ -9110,6 +9215,9 @@
             "version": "1.0",
             "code": "symptoms.pain.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.37.2",
         "text": "Schweregrad?",
@@ -9203,6 +9311,9 @@
             "version": "1.0",
             "code": "symptoms.productiveCough.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.38.2",
         "text": "Schweregrad?",
@@ -9296,6 +9407,9 @@
             "version": "1.0",
             "code": "symptoms.dryCough.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.39.2",
         "text": "Schweregrad?",
@@ -9389,6 +9503,9 @@
             "version": "1.0",
             "code": "symptoms.cloudedConsciousness.severity"
           }
+        }, {
+          "url": "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+          "valueBoolean": true
         } ],
         "linkId": "8.40.2",
         "text": "Schweregrad?",
