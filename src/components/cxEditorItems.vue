@@ -4,7 +4,7 @@
     <q-splitter
       v-model="splitterModel"
       :limits="limitsSpliter"
-      style="height: 70vh"
+      style="height: calc(100vh - 140px)"
     >
       <template v-slot:before>
         <div>
@@ -33,7 +33,7 @@
                 ></div>
                 <div
                   class="row items-center justify-between"
-                  style="width: 100%"
+                  style="width: 100%; flex-wrap:nowrap"
                   @dragover="onDragOver"
                   @dragleave="onDragLeave"
                   @drop="onDrop"
@@ -59,7 +59,7 @@
                   </div>
                   <div
                     class="row items-center justify-end"
-                    style="width: 160px"
+                    style="width: 160px;min-width: 160px;"
                   >
                     <!-- reverse original text question  -->
                     <div style="width: 30px">
@@ -1270,7 +1270,7 @@ export default {
     },
     getGeccoExtensionValue(e) {
       let extension = e.extension?.find(it => it.url==="https://num-compass.science/fhir/StructureDefinition/CompassGeccoItem")
-      return extension?.valueCoding?.code
+      return extension?.valueCoding?.code;
     },
     onClickAddAnswer(e) {
       const that = this;
