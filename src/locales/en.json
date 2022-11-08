@@ -84,9 +84,9 @@
       }
     },
     "tabsTitles":{
-      "ediorQRE": "Questionnaire Editor",
-      "metadata": "Metadata",
-      "settings": "Settings"
+      "ediorQRE": "Questionnaire Items",
+      "metadata": "Questionnaire Metadata",
+      "settings": "Editor Settings"
     },
     "tabs":{
       "metadata":{

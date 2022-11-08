@@ -1,11 +1,6 @@
 <template>
   <div class="row justify-center">
     <div class="col-6">
-      <q-input
-        v-if="$route.name !== 'Import'"
-        v-model="version"
-        :label="$t('components.navigationBar.version')"
-      />
       <q-list class="rounded-borders">
         <q-expansion-item
           :label="$t('components.navigationBar.metadataItems.identifier')"
@@ -207,13 +202,24 @@
         :label="$t('components.navigationBar.metadataItems.URL')"
       />
       <q-input
+          v-if="$route.name !== 'Import'"
+          v-model="version"
+          :label="$t('components.navigationBar.version')"
+      />
+      <q-input
         v-if="$route.name !== 'Import'"
         v-model="name"
         :label="$t('components.navigationBar.metadataItems.name')"
       />
       <q-input
+          v-if="$route.name !== 'Import'"
+          v-model="title"
+          :label="$t('components.navigationBar.metadataItems.title')"
+      />
+      <q-select
         v-if="$route.name !== 'Import'"
         v-model="status"
+        :options="statusOptions"
         :label="$t('components.navigationBar.metadataItems.status')"
       />
       <q-input
@@ -240,11 +246,7 @@
         v-model="lastReviewDate"
         :label="$t('components.navigationBar.metadataItems.lastReviewDate')"
       />
-      <q-input
-        v-if="$route.name !== 'Import'"
-        v-model="title"
-        :label="$t('components.navigationBar.metadataItems.title')"
-      />
+
       <q-item tag="label" v-ripple v-if="$route.name !== 'Import'">
         <q-item-section>
           <q-item-label>{{
@@ -266,6 +268,7 @@ export default {
   setup() {
     return {
       expanded: ref(true),
+      statusOptions: ['draft','active','retired','unknown'],
     };
   },
   computed: {
@@ -361,6 +364,7 @@ export default {
       set(value) {
         this.$store.commit("setExperimental", value);
       },
+
     },
   },
   methods: {

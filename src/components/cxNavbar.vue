@@ -219,6 +219,10 @@ export default {
       let newQRE = {
         resourceType: "Questionnaire",
         status: "draft",
+        url: "https://num-compass.science/de/",
+        version: "1.0",
+        name: "New questionnaire",
+        title: "New questionnaire",
       };
       this.uploadJSONQuestionnaire(newQRE);
       this.setNameofQuestionnaireNEW();

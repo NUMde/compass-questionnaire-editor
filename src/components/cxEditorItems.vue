@@ -81,7 +81,7 @@
                       label="GECCO"
                       color="red"
                       v-if="hasGeccoExtension(prop.node)"
-                    />
+                    ><q-tooltip>This item will be mapped to the corresponding FHIR resource</q-tooltip></q-badge>
                     <div v-if="!prop.node.disabled">
                       <q-toggle
                         size="xs"
