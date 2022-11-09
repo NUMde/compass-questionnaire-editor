@@ -35,18 +35,29 @@ const editorTools = {
   },
   assingNewItemIDs(item) {
     if (item.item) {
+      let changedIdMap = new Map();
       let idCount = 0;
+
       item.item.forEach((element) => {
         if (element.__active) {
           idCount++;
-          element.linkId = item.linkId + "." + idCount;
+          let oldLinkId = element.linkId;
+          let newLinkId = item.linkId + "." + idCount;
+          changedIdMap.set(oldLinkId, newLinkId);
+          element.linkId = newLinkId;
         } else {
+          changedIdMap.set(element.linkId, "");
           element.linkId = "";
         }
         if (element.item) {
-          this.assingNewItemIDs(element);
+          changedIdMap = new Map([
+            ...changedIdMap,
+            ...this.assingNewItemIDs(element),
+          ]);
         }
       });
+
+      return changedIdMap;
     }
   },
   regenerateInternalIDs(item) {
@@ -61,17 +72,70 @@ const editorTools = {
   },
   regenerateLinkIds(item) {
     let idCount = 0;
+    let changedIdMap = new Map();
+
     item.forEach((element) => {
       if (element.__active) {
         idCount++;
-        element.linkId = idCount + "";
+        let oldLinkId = element.linkId;
+        let newLinkId = idCount + "";
+        changedIdMap.set(oldLinkId, newLinkId);
+        element.linkId = newLinkId;
       } else {
+        changedIdMap.set(element.linkId, "");
         element.linkId = "";
       }
       if (element.item) {
-        this.assingNewItemIDs(element);
+        changedIdMap = new Map([
+          ...changedIdMap,
+          ...this.assingNewItemIDs(element),
+        ]);
       }
     });
+
+    return changedIdMap;
+  },
+
+  regenerateConditionWhenIds(item, changedIdMap) {
+    item.forEach((element) => {
+      if (element.type === "group") {
+        this.regenerateConditionWhenIds(element.item, changedIdMap);
+      }
+
+      if (element.enableWhen != null) {
+        element.enableWhen.forEach((condition) => {
+          if (
+            condition.question != "" &&
+            changedIdMap.has(condition.question)
+          ) {
+            condition.question = changedIdMap.get(condition.question);
+          }
+        });
+      }
+    });
+  },
+  isEnableWhenCondition(item, linkId) {
+    // deactivated Questions
+    if (linkId === "") {
+      return false;
+    }
+    for (const element of item) {
+      if (element.enableWhen != null) {
+        for (const condition of element.enableWhen) {
+          if (condition.question === linkId) {
+            return true;
+          }
+        }
+      }
+
+      if (element.item) {
+        const found = this.isEnableWhenCondition(element.item, linkId);
+        if (found) {
+          return true;
+        }
+      }
+    }
+    return false;
   },
   disableItem(item, toggleValue) {
     if (item.item) {

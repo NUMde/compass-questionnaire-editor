@@ -1070,7 +1070,8 @@ export default {
         item.__linkId = this.item.length + 1 + "";
         this.item.push(item);
       }
-      this.editorTools.regenerateLinkIds(this.item);
+      let changedIdMap = this.editorTools.regenerateLinkIds(this.item);
+      this.editorTools.regenerateConditionWhenIds(this.item, changedIdMap);
     },
     onAddCondition() {
       if (this.selectedItem.enableWhen === undefined) {
@@ -1227,12 +1228,34 @@ export default {
         }
       }
       aitemParentSource.splice(indexOfItemtoBeRemoved, 1);
-      this.editorTools.regenerateLinkIds(this.item);
+      let changedIdMap = this.editorTools.regenerateLinkIds(this.item);
       this.editorTools.regenerateInternalIDs(this.item);
+      this.editorTools.regenerateConditionWhenIds(this.item, changedIdMap);
     },
     onToggle(id) {
+      let linkId = this.editorTools.getCurrentQuestionNodeByID(
+        id,
+        this.item,
+      ).linkId;
+
+      if (this.editorTools.isEnableWhenCondition(this.item, linkId)) {
+        alert(
+          "There are one or more question that depend on the one you deactivated. " +
+            "Keeping the LinkID on these conditions would harm the logical integrety of the questionnaire. " +
+            "They were therefore removed. \n" +
+            "Please be aware that if you reactivate the question you have to relink these conditions.",
+        );
+      }
+
       this.editorTools.disableEntireItemQuestion(id, this.item);
-      this.editorTools.regenerateLinkIds(this.item);
+      let changedIdMap = this.editorTools.regenerateLinkIds(this.item);
+      this.editorTools.regenerateConditionWhenIds(this.item, changedIdMap);
+    },
+    isCondition(id) {
+      return this.editorTools.isEnableWhenCondition(
+        this.item,
+        this.editorTools.getCurrentQuestionNodeByID(id, this.item).linkId,
+      );
     },
     onAddQuestion(e) {
       //No Add Question on Items disabled
@@ -1266,7 +1289,8 @@ export default {
         item.__linkId = this.item.length + 1 + "";
         this.item.push(item);
       }
-      this.editorTools.regenerateLinkIds(this.item);
+      let changedIdMap = this.editorTools.regenerateLinkIds(this.item);
+      this.editorTools.regenerateConditionWhenIds(this.item, changedIdMap);
     },
     onAddGECCOQuestion(e) {
       //No Add Question on Items disabled
@@ -1364,8 +1388,9 @@ export default {
       if (answer) {
         this.deleteItemRecursivly(this.item, item.key);
       }
-      this.editorTools.regenerateLinkIds(this.item);
+      let changedIdMap = this.editorTools.regenerateLinkIds(this.item);
       this.editorTools.regenerateInternalIDs(this.item);
+      this.editorTools.regenerateConditionWhenIds(this.item, changedIdMap);
     },
     deleteItemRecursivly(itemlist, key) {
       for (let idx in itemlist) {
