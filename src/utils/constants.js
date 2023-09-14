@@ -33,6 +33,7 @@ export const answerTypeButton = [
 
 export const questionTypesIcons = [
   { name: "group", icon: "article", label: "Group" },
+  { name: "display", icon: "info", label: "Display" },
   { name: "string", icon: "text_fields", label: "String" },
   { name: "choice", icon: "toc", label: "Choice" },
   { name: "boolean", icon: "toggle_off", label: "Boolean" },
