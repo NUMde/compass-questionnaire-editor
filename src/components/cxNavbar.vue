@@ -225,6 +225,7 @@ export default {
         version: "1.0",
         name: "New questionnaire",
         title: "New questionnaire",
+        identifier: [],
       };
       this.uploadJSONQuestionnaire(newQRE);
       this.setNameofQuestionnaireNEW();
