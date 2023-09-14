@@ -202,9 +202,9 @@
         :label="$t('components.navigationBar.metadataItems.URL')"
       />
       <q-input
-          v-if="$route.name !== 'Import'"
-          v-model="version"
-          :label="$t('components.navigationBar.version')"
+        v-if="$route.name !== 'Import'"
+        v-model="version"
+        :label="$t('components.navigationBar.version')"
       />
       <q-input
         v-if="$route.name !== 'Import'"
@@ -212,9 +212,9 @@
         :label="$t('components.navigationBar.metadataItems.name')"
       />
       <q-input
-          v-if="$route.name !== 'Import'"
-          v-model="title"
-          :label="$t('components.navigationBar.metadataItems.title')"
+        v-if="$route.name !== 'Import'"
+        v-model="title"
+        :label="$t('components.navigationBar.metadataItems.title')"
       />
       <q-select
         v-if="$route.name !== 'Import'"
@@ -268,7 +268,7 @@ export default {
   setup() {
     return {
       expanded: ref(true),
-      statusOptions: ['draft','active','retired','unknown'],
+      statusOptions: ["draft", "active", "retired", "unknown"],
     };
   },
   computed: {
@@ -364,7 +364,6 @@ export default {
       set(value) {
         this.$store.commit("setExperimental", value);
       },
-
     },
   },
   methods: {

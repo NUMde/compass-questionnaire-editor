@@ -292,15 +292,35 @@ const FHIRValidations = {
     if (item.type === "integer") {
       item.extension = item.extension || [];
       let extensionSet = [
-        {url: "http://hl7.org/fhir/StructureDefinition/questionnaire-sliderStepValue", targetIdx: 0, type: "Integer" },
-        {url: "http://hl7.org/fhir/StructureDefinition/minValue", targetIdx: 1, type: "Integer"},
-        {url: "https://num-compass.science/fhir/StructureDefinition/LowRangeLabel", targetIdx: 2, type: "String"},
-        {url: "http://hl7.org/fhir/StructureDefinition/maxValue", targetIdx: 3, type: "Integer"},
-        {url: "https://num-compass.science/fhir/StructureDefinition/HighRangeLabel", targetIdx: 4, type: "String"}
+        {
+          url: "http://hl7.org/fhir/StructureDefinition/questionnaire-sliderStepValue",
+          targetIdx: 0,
+          type: "Integer",
+        },
+        {
+          url: "http://hl7.org/fhir/StructureDefinition/minValue",
+          targetIdx: 1,
+          type: "Integer",
+        },
+        {
+          url: "https://num-compass.science/fhir/StructureDefinition/LowRangeLabel",
+          targetIdx: 2,
+          type: "String",
+        },
+        {
+          url: "http://hl7.org/fhir/StructureDefinition/maxValue",
+          targetIdx: 3,
+          type: "Integer",
+        },
+        {
+          url: "https://num-compass.science/fhir/StructureDefinition/HighRangeLabel",
+          targetIdx: 4,
+          type: "String",
+        },
       ];
 
-      for (let {url, targetIdx, type} of extensionSet) {
-        let index = item.extension.findIndex((e) => e.url === url)
+      for (let { url, targetIdx, type } of extensionSet) {
+        let index = item.extension.findIndex((e) => e.url === url);
         if (index === -1) {
           item.extension.splice(targetIdx, 0, {
             url,
@@ -312,7 +332,6 @@ const FHIRValidations = {
           item.extension.splice(targetIdx, 0, element);
         }
       }
-
     }
   },
   addPropertiesNeededtoGUIItemNode(item) {
