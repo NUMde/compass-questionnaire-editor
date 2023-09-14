@@ -98,7 +98,7 @@ const editorTools = {
 
   regenerateConditionWhenIds(item, changedIdMap) {
     item.forEach((element) => {
-      if (element.type === "group") {
+      if (element.type === "group" && element.item) {
         this.regenerateConditionWhenIds(element.item, changedIdMap);
       }
 
