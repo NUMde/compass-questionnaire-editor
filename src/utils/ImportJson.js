@@ -51,13 +51,13 @@ const FHIRValidations = {
       }
       if (item.enableWhen) {
         item.enableWhen.forEach((element) => {
-          let itemToAppendCondintion = this.getItemNodeByInternalID(
+          let itemToAppendCondition = this.getItemNodeByInternalID(
             element.question,
             this.questionnaire.item,
           );
-          if (itemToAppendCondintion) {
-            if (!itemToAppendCondintion.__dependeceCondition) {
-              itemToAppendCondintion.__dependeceCondition = {
+          if (itemToAppendCondition) {
+            if (!itemToAppendCondition.__dependeceCondition) {
+              itemToAppendCondition.__dependeceCondition = {
                 __icon: "account_tree",
                 __questions: [],
               };
@@ -70,7 +70,7 @@ const FHIRValidations = {
             }
             condition.__linkId = item.linkId;
             condition.__text = item.text;
-            itemToAppendCondintion.__dependeceCondition.__questions.push(
+            itemToAppendCondition.__dependeceCondition.__questions.push(
               condition,
             );
           }
@@ -81,10 +81,10 @@ const FHIRValidations = {
   getItemNodeByInternalID(linkId, item = []) {
     let itemSearched;
 
-    let searchNodebyLinkId = function (linkId, item) {
+    let searchNodeByLinkId = function (linkId, item) {
       item.forEach((element) => {
         if (element.item) {
-          searchNodebyLinkId(linkId, element.item);
+          searchNodeByLinkId(linkId, element.item);
         }
         if (element.linkId === linkId) {
           itemSearched = element;
@@ -92,7 +92,7 @@ const FHIRValidations = {
       });
     };
 
-    searchNodebyLinkId(linkId, item);
+    searchNodeByLinkId(linkId, item);
 
     return itemSearched;
   },
