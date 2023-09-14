@@ -81,7 +81,11 @@
                       label="GECCO"
                       color="red"
                       v-if="hasGeccoExtension(prop.node)"
-                    ><q-tooltip>This item will be mapped to the corresponding FHIR resource</q-tooltip></q-badge>
+                      ><q-tooltip
+                        >This item will be mapped to the corresponding FHIR
+                        resource</q-tooltip
+                      ></q-badge
+                    >
                     <div v-if="!prop.node.disabled">
                       <q-toggle
                         size="xs"
@@ -800,7 +804,7 @@
                           dense
                           type="number"
                           @keypress="onlyNumber"
-                          v-model="selectedItem.extension[0].valueInteger"
+                          v-model="selectedItem.extensions[0].valueInteger"
                         ></q-input>
                       </q-card-section>
                     </q-item-section>
@@ -813,7 +817,7 @@
                           dense
                           type="number"
                           @keypress="onlyNumber"
-                          v-model="selectedItem.extension[1].valueInteger"
+                          v-model="selectedItem.extensions[1].valueInteger"
                         ></q-input>
                       </q-card-section>
                     </q-item-section>
@@ -824,7 +828,7 @@
                           :disable="!selectedItem.__active"
                           :label="$t('views.editor.lowRangeLabel')"
                           dense
-                          v-model="selectedItem.extension[2].valueString"
+                          v-model="selectedItem.extensions[2].valueString"
                         ></q-input>
                       </q-card-section>
                     </q-item-section>
@@ -837,7 +841,7 @@
                           dense
                           type="number"
                           @keypress="onlyNumber"
-                          v-model="selectedItem.extension[3].valueInteger"
+                          v-model="selectedItem.extensions[3].valueInteger"
                         ></q-input>
                       </q-card-section>
                     </q-item-section>
@@ -848,7 +852,7 @@
                           :disable="!selectedItem.__active"
                           :label="$t('views.editor.highRangeLabel')"
                           dense
-                          v-model="selectedItem.extension[4].valueString"
+                          v-model="selectedItem.extensions[4].valueString"
                         ></q-input>
                       </q-card-section>
                     </q-item-section>
@@ -1325,8 +1329,8 @@ export default {
     },
     hasGeccoExtension(e) {
       return (
-        e.extension &&
-        e.extension.some(
+        e.extensions &&
+        e.extensions.some(
           (it) =>
             it.url ===
             "https://num-compass.science/fhir/StructureDefinition/CompassGeccoItem",
@@ -1334,7 +1338,7 @@ export default {
       );
     },
     getGeccoExtensionValue(e) {
-      let extension = e.extension?.find(
+      let extension = e.extensions?.find(
         (it) =>
           it.url ===
           "https://num-compass.science/fhir/StructureDefinition/CompassGeccoItem",
