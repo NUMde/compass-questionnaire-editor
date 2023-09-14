@@ -181,7 +181,9 @@ export default {
           delete this.getQuestionnaireImportedJSON.version;
         }
         const objFinalToExport = JSON.stringify(
-          this.exportJsonQuestionnaire.getExportObject(objToExport), null, 2
+          this.exportJsonQuestionnaire.getExportObject(objToExport),
+          null,
+          2,
         );
         var blob = new Blob([objFinalToExport], {
           type: "application/json;charset=utf-8",

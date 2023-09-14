@@ -140,10 +140,7 @@
           </template>
         </q-splitter>
       </q-page>
-      <q-page-sticky
-        position="bottom-right"
-        :offset="[18, 18]"
-      >
+      <q-page-sticky position="bottom-right" :offset="[18, 18]">
         <q-btn
           fab
           icon="done"
@@ -160,8 +157,8 @@
 // import { mapGetters } from "vuex";
 import { ref } from "vue";
 import { editorTools } from "../utils/editor.js";
-import * as geccoQuestionnaire from "./../store/questionnaire.json"
-import {importJsonQuestionnaire} from "@/utils/ImportJson";
+import * as geccoQuestionnaire from "./../store/questionnaire.json";
+import { importJsonQuestionnaire } from "@/utils/ImportJson";
 
 export default {
   props: {},
@@ -182,7 +179,7 @@ export default {
     };
   },
   created() {
-    importJsonQuestionnaire.getValidateFHIRResource(geccoQuestionnaire) //create __internal_ids
+    importJsonQuestionnaire.getValidateFHIRResource(geccoQuestionnaire); //create __internal_ids
     this.questionaireGUI = geccoQuestionnaire;
     this.item = this.questionaireGUI.item ? this.questionaireGUI.item : [];
   },
@@ -203,8 +200,16 @@ export default {
   },
   methods: {
     onSelectGECCOQuestion(questionSelected) {
-      if(questionSelected.extension?.find(it => it?.url === "https://num-compass.science/fhir/StructureDefinition/DependentItem")) {
-        alert("This item is dependent of another item. Please import the upper item group!")
+      if (
+        questionSelected.extension?.find(
+          (it) =>
+            it?.url ===
+            "https://num-compass.science/fhir/StructureDefinition/DependentItem",
+        )
+      ) {
+        alert(
+          "This item is dependent of another item. Please import the upper item group!",
+        );
         return;
       }
 
