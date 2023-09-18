@@ -23,4 +23,5 @@ module.exports = {
     },
   },
   transpileDependencies: ["quasar"],
+  publicPath: process.env.BASE_URL || "/",
 };
