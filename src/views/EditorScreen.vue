@@ -8,7 +8,7 @@
     align="justify"
     narrow-indicator
   >
-    <q-tab name="editor" :label="$t('views.tabsTitles.ediorQRE')" />
+    <q-tab name="editor" :label="$t('views.tabsTitles.editorQRE')" />
     <q-tab name="metadata" :label="$t('views.tabsTitles.metadata')" />
     <q-tab name="settings" :label="$t('views.tabsTitles.settings')" />
   </q-tabs>

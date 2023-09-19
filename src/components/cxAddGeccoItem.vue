@@ -21,18 +21,19 @@
                 selected-color="primary"
                 v-model:selected="selected"
                 children-key="item"
+                :icon="treeIcon"
               >
                 <template v-slot:default-header="prop">
                   <div class="row justify-between" style="width: 100%">
                     <div class="row">
                       <q-icon
-                        :name="prop.node.__icon"
+                        :name="articleIcon"
                         size="20px"
                         class="q-mr-sm text-grey-8"
                         ><q-tooltip>
                           {{ prop.node.type }}
-                        </q-tooltip></q-icon
-                      >
+                        </q-tooltip>
+                      </q-icon>
                       <div class="text-bold q-pr-sm">
                         {{ prop.node.linkId }}
                         <q-tooltip> {{ $t("components.linkId") }} </q-tooltip>
@@ -143,7 +144,7 @@
       <q-page-sticky position="bottom-right" :offset="[18, 18]">
         <q-btn
           fab
-          icon="done"
+          :icon="doneIcon"
           color="primary"
           padding="none xl"
           :label="$t('views.editor.selectAnswer')"
@@ -159,6 +160,11 @@ import { ref } from "vue";
 import { editorTools } from "../utils/editor.js";
 import * as geccoQuestionnaire from "./../store/questionnaire.json";
 import { importJsonQuestionnaire } from "@/utils/ImportJson";
+import {
+  matDone,
+  matPlayArrow,
+  matArticle,
+} from "@quasar/extras/material-icons";
 
 export default {
   props: {},
@@ -166,22 +172,25 @@ export default {
     const filter = ref("de");
     return {
       splitterModel: ref(50), // start at 50%
-      edtiorTools: editorTools,
+      editorTools,
       filter,
     };
   },
   data() {
     return {
       item: [],
-      questionaireGUI: {},
+      questionnaireGUI: {},
       selected: null,
       selectedItem: {},
     };
   },
   created() {
     importJsonQuestionnaire.getValidateFHIRResource(geccoQuestionnaire); //create __internal_ids
-    this.questionaireGUI = geccoQuestionnaire;
-    this.item = this.questionaireGUI.item ? this.questionaireGUI.item : [];
+    this.questionnaireGUI = geccoQuestionnaire;
+    this.item = this.questionnaireGUI.item ? this.questionnaireGUI.item : [];
+    this.doneIcon = matDone;
+    this.treeIcon = matPlayArrow;
+    this.articleIcon = matArticle;
   },
   computed: {
     // ...mapGetters(["getQuestionnaireGECCO"]),
@@ -192,7 +201,7 @@ export default {
         this.selectedItem = this.item;
         return;
       }
-      this.selectedItem = this.edtiorTools.getCurrentQuestionNodeByID(
+      this.selectedItem = this.editorTools.getCurrentQuestionNodeByID(
         val,
         this.item,
       );

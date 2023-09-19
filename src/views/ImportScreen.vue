@@ -23,7 +23,7 @@
             @input-filter="inputFilter"
           >
             <div class="column items-center">
-              <q-icon name="upload_file" size="xl" />
+              <q-icon :name="upload_file" size="xl" />
               <h4>{{ $t("views.import.dropFile") }}</h4>
               <p>
                 {{ $t("views.import.instructions") }}
@@ -41,7 +41,7 @@
     <q-card style="width: 700px; max-width: 80vw">
       <q-card-section>
         <div class="text-h6">
-          <q-icon name="error" class="text-red" style="font-size: 2rem" />
+          <q-icon :name="error" class="text-red" style="font-size: 2rem" />
           {{ $t("messagesErrors.error") }}
         </div>
       </q-card-section>
@@ -74,6 +74,7 @@ import { mapMutations, mapActions, mapGetters } from "vuex";
 import { useQuasar } from "quasar";
 import { importJsonQuestionnaire } from "../utils/ImportJson.js";
 import { ref } from "vue";
+import { matError, matUploadFile } from "@quasar/extras/material-icons";
 
 export default {
   setup() {
@@ -99,6 +100,10 @@ export default {
       messageError: "",
       messageErrorFHIR: [],
     };
+  },
+  created() {
+    this.error = matError;
+    this.upload_file = matUploadFile;
   },
   methods: {
     ...mapMutations(["setFileImported"]),

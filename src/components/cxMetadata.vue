@@ -5,6 +5,7 @@
         <q-expansion-item
           :label="$t('components.navigationBar.metadataItems.identifier')"
           v-model="expanded"
+          :expand-icon="expandIcon"
         >
           <q-separator />
           <q-card>
@@ -17,7 +18,7 @@
                 size="sm"
                 @click="addId"
               >
-                <q-icon left name="add" />
+                <q-icon left :name="addIcon" />
                 <div>
                   {{ $t("views.tabs.metadata.addNewId") }}
                 </div></q-btn
@@ -41,7 +42,7 @@
                   size="sm"
                   @click="removeID(index)"
                 >
-                  <q-icon left name="add" />
+                  <q-icon left :name="deleteIcon" />
                   <div>
                     {{ $t("views.tabs.metadata.removeId") }}
                   </div></q-btn
@@ -221,6 +222,7 @@
         v-model="status"
         :options="statusOptions"
         :label="$t('components.navigationBar.metadataItems.status')"
+        :dropdown-icon="selectIcon"
       />
       <q-input
         v-if="$route.name !== 'Import'"
@@ -263,6 +265,12 @@
 <script>
 import { mapGetters } from "vuex";
 import { ref } from "vue";
+import {
+  matAdd,
+  matKeyboardArrowUp,
+  matKeyboardArrowDown,
+  matDelete,
+} from "@quasar/extras/material-icons";
 
 export default {
   setup() {
@@ -271,9 +279,15 @@ export default {
       statusOptions: ["draft", "active", "retired", "unknown"],
     };
   },
+  created() {
+    this.addIcon = matAdd;
+    this.expandIcon = matKeyboardArrowUp;
+    this.selectIcon = matKeyboardArrowDown;
+    this.deleteIcon = matDelete;
+  },
   computed: {
     ...mapGetters([
-      "getNameofQuestionnaire",
+      "getNameOfQuestionnaire",
       "getQuestionnaireImportedJSON",
       "getVersionQuestionnaire",
     ]),

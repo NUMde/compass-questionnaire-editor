@@ -5,6 +5,7 @@
         <q-expansion-item
           expand-separator
           :label="$t('views.tabs.settings.Answers.title')"
+          :expand-icon="expandIcon"
         >
           <q-card>
             <q-card-section>
@@ -52,7 +53,12 @@
   </div>
 </template>
 <script>
+import { matKeyboardArrowDown } from "@quasar/extras/material-icons";
+
 export default {
+  created() {
+    this.expandIcon = matKeyboardArrowDown;
+  },
   computed: {
     answerValueset: {
       get() {

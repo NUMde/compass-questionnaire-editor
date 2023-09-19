@@ -3,7 +3,7 @@
     <!-- Question Editor  -->
     <q-splitter
       v-model="splitterModel"
-      :limits="limitsSpliter"
+      :limits="limitsSplitter"
       style="height: calc(100vh - 140px)"
     >
       <template v-slot:before>
@@ -43,13 +43,13 @@
                 >
                   <div class="row items-center" style="min-width: 150px">
                     <q-icon
-                      :name="prop.node.__icon"
+                      :name="this[prop.node.__icon]"
                       size="15px"
                       class="q-mr-sm text-grey-8"
                       ><q-tooltip>
                         {{ prop.node.type }}
-                      </q-tooltip></q-icon
-                    >
+                      </q-tooltip>
+                    </q-icon>
                     <div class="col-12 q-body-1 text-weight-bold">
                       {{ prop.node.text }}
                     </div>
@@ -65,7 +65,7 @@
                         flat
                         round
                         size="xs"
-                        icon="history"
+                        :icon="historyIcon"
                         class="q-mr-sm text-grey-8"
                         v-if="
                           prop.node.text !== prop.node.__oldText &&
@@ -103,10 +103,10 @@
                     </div>
                     <div style="width: 30px">
                       <q-btn
+                        :icon="deleteIcon"
                         flat
                         round
                         size="xs"
-                        icon="delete"
                         class="q-mr-sm text-grey-8"
                         @click="deleteItem(prop)"
                       >
@@ -117,13 +117,13 @@
                     </div>
                     <div class="q-body-1">
                       <q-icon
-                        name="drag_indicator"
+                        :name="drag_indicator"
                         size="20px"
                         class="q-mr-sm text-grey-5"
                         ><q-tooltip>
                           {{ $t("views.editor.dragItem") }}
-                        </q-tooltip></q-icon
-                      >
+                        </q-tooltip>
+                      </q-icon>
                     </div>
                   </div>
                 </div>
@@ -135,8 +135,8 @@
                     >{{ prop.node.type }}:{{ prop.node.linkId
                     }}<q-tooltip>
                       {{ $t("components.linkId") }}
-                    </q-tooltip></span
-                  >
+                    </q-tooltip>
+                  </span>
                 </div>
               </div>
             </template>
@@ -158,7 +158,8 @@
                 vertical-actions-align="left"
                 color="primary"
                 push
-                icon="keyboard_arrow_up"
+                :icon="arrowUpIcon"
+                :active-icon="closeIcon"
                 direction="up"
                 padding="none xl"
                 :label="$t('views.editor.addItem')"
@@ -169,7 +170,7 @@
                   label-position="right"
                   color="primary"
                   @click="onAddQuestion(questionTypeIcon)"
-                  :icon="questionTypeIcon.icon"
+                  :icon="this[questionTypeIcon.icon]"
                   :label="questionTypeIcon.label"
                 />
                 <q-fab-action
@@ -177,7 +178,7 @@
                   label-position="right"
                   color="red"
                   @click="onAddGECCOQuestion"
-                  icon="coronavirus"
+                  :icon="coronavirusIcon"
                   label="Import GECCO item(s)..."
                 />
               </q-fab>
@@ -195,7 +196,7 @@
               <q-btn
                 color="primary"
                 v-if="lastSelected"
-                icon="arrow_back"
+                :icon="backIcon"
                 @click="onBackLastSelectedItem"
                 :label="$t('views.editor.backLastItem')"
               />
@@ -229,14 +230,14 @@
                   {{ $t("components.fieldEmpty") }}
                 </template></q-input
               >
-              <!-- Show Depedence Condition -->
+              <!-- Show Dependence Condition -->
               <q-btn
                 flat
                 round
                 color="primary"
-                icon="device_hub"
+                :icon="device_hub"
                 @click="alert = true"
-                v-if="selectedItem.__dependeceCondition"
+                v-if="selectedItem.__dependenceCondition"
                 ><q-tooltip>
                   {{ $t("views.editor.conditionFulfilled") }}
                 </q-tooltip></q-btn
@@ -263,7 +264,7 @@
                     :disable="!selectedItem.__active"
                     dense
                     flat
-                    icon="autorenew"
+                    :icon="refreshIcon"
                     @click="newUUID"
                     >{{ $t("views.editor.newUUID")
                     }}<q-tooltip>
@@ -347,12 +348,12 @@
                 "
                 :disable="!selectedItem.__active"
                 expand-separator
-                icon="question_answer"
+                :icon="forumIcon"
                 :label="$t('views.editor.answers')"
               >
                 <q-separator />
                 <q-card>
-                  <!-- Multiple asnwers -->
+                  <!-- Multiple answers -->
                   <div
                     v-if="
                       selectedItem.__icon === 'toc' || //choice
@@ -390,7 +391,7 @@
                                 ><template v-slot:error>
                                   {{ $t("components.fieldEmpty") }} </template
                                 ><template v-slot:prepend>
-                                  <q-icon :name="answerOption.__icon" />
+                                  <q-icon :name="this[answerOption.__icon]" />
                                 </template>
                                 <!-- reverse original text answer  -->
                                 <q-btn
@@ -434,8 +435,9 @@
                                       }`
                                     : ''
                                 "
-                                ><template v-slot:prepend>
-                                  <q-icon :name="answerOption.__icon" />
+                              >
+                                <template v-slot:prepend>
+                                  <q-icon :name="this[answerOption.__icon]" />
                                 </template>
                                 <!-- reverse original text answer  -->
                                 <q-btn
@@ -453,10 +455,11 @@
                                     answerOption.valueInteger =
                                       answerOption.__oldValueInteger
                                   "
-                                  ><q-tooltip>
-                                    {{ $t("components.reverseAnswer") }}
-                                  </q-tooltip></q-btn
                                 >
+                                  <q-tooltip>
+                                    {{ $t("components.reverseAnswer") }}
+                                  </q-tooltip>
+                                </q-btn>
                               </q-input>
                             </div>
 
@@ -501,8 +504,8 @@
                                   "
                                   ><q-tooltip>
                                     {{ $t("components.reverseAnswer") }}
-                                  </q-tooltip></q-btn
-                                >
+                                  </q-tooltip>
+                                </q-btn>
                               </q-input>
                             </div>
 
@@ -525,14 +528,15 @@
                                       }`
                                     : ''
                                 "
-                                ><template v-slot:prepend>
-                                  <q-icon :name="answerOption.__icon" />
+                              >
+                                <template v-slot:prepend>
+                                  <q-icon :name="this[answerOption.__icon]" />
                                 </template>
                                 <!-- reverse original text answer  -->
                                 <q-btn
                                   flat
                                   round
-                                  icon="history"
+                                  :icon="historyIcon"
                                   :disable="!selectedItem.__active"
                                   class="q-mr-sm text-grey-8"
                                   v-if="
@@ -568,8 +572,8 @@
                                   dense
                                   class="col-5"
                                   v-model="answerOption.valueCoding.code"
-                                ></q-input
-                                ><q-input
+                                />
+                                <q-input
                                   :disable="
                                     !selectedItem.__active ||
                                     hasGeccoExtension(selectedItem)
@@ -579,7 +583,7 @@
                                   dense
                                   class="col-5"
                                   v-model="answerOption.valueCoding.system"
-                                ></q-input>
+                                />
                               </div>
                               <div class="text-grey-8">
                                 <!-- Remove answer  -->
@@ -623,7 +627,7 @@
                             v-for="answerType in answerTypeButton"
                             :key="answerType.name"
                             color="primary"
-                            :icon="answerType.icon"
+                            :icon="this[answerType.icon]"
                             :label="answerType.label"
                             @click="onClickAddAnswer(answerType)"
                           />
@@ -644,7 +648,8 @@
               <q-expansion-item
                 :disable="!selectedItem.__active"
                 expand-separator
-                icon="account_tree"
+                :icon="account_tree"
+                :expand-icon="expandIcon"
                 :label="$t('views.editor.itemConditions')"
                 default-opened
               >
@@ -668,7 +673,7 @@
                               v-if="enableWhen.question !== ''"
                               flat
                               color="primary"
-                              icon="subdirectory_arrow_left"
+                              :icon="linkIcon"
                               @click="onGotoItem(enableWhen.question)"
                               ><q-tooltip>
                                 {{ $t("views.editor.navigateToItem") }}
@@ -701,6 +706,7 @@
                             ]"
                             :label="$t('views.editor.operator')"
                             dense
+                            :dropdown-icon="dropDownIcon"
                           />
                           <!-- enableWhen boolean -->
                           <q-select
@@ -714,6 +720,7 @@
                             :options="['true', 'false']"
                             :label="$t('views.editor.operator')"
                             dense
+                            :dropdown-icon="dropDownIcon"
                           />
                           <!-- enableWhen integer -->
                           <q-input
@@ -751,7 +758,7 @@
                             :disable="!selectedItem.__active"
                             flat
                             color="grey-6"
-                            icon="highlight_off"
+                            :icon="cancelIcon"
                             @click="onRemoveCondition(index)"
                           >
                             <q-tooltip>
@@ -769,7 +776,7 @@
                       padding="none xl"
                       v-if="selectedItem.__active"
                       fab
-                      icon="add"
+                      :icon="addIcon"
                       color="primary"
                       :label="$t('views.editor.addNewCondition')"
                       @click="onAddCondition"
@@ -783,7 +790,8 @@
                 v-if="selectedItem.type === 'integer'"
                 :disable="!selectedItem.__active"
                 expand-separator
-                icon="account_tree"
+                :icon="account_tree"
+                :expand-icon="expandIcon"
                 :label="$t('views.editor.extensions')"
               >
                 <q-separator />
@@ -873,7 +881,7 @@
 
         <q-card-section class="q-pt-none">
           <div
-            v-for="(question, index) in selectedItem.__dependeceCondition
+            v-for="(question, index) in selectedItem.__dependenceCondition
               .__questions"
             :key="index"
           >
@@ -941,6 +949,35 @@ import { mapGetters } from "vuex";
 import { v4 as uuidv4 } from "uuid";
 import cxEnableWhen from "../components/cxEnableWhen.vue";
 import CxAddGeccoItem from "@/components/cxAddGeccoItem";
+import {
+  matAdd,
+  matClose,
+  matDelete,
+  matKeyboardArrowUp,
+  matKeyboardArrowDown,
+  matCoronavirus,
+  matArticle,
+  matPin,
+  matInfo,
+  matTextFields,
+  matToc,
+  matHorizontalSplit,
+  matEvent,
+  matInput,
+  matToggleOff,
+  matHistory,
+  matDragIndicator,
+  matArrowBack,
+  matDeviceHub,
+  matForum,
+  matAccountTree,
+  matHighlightOff,
+  matAutorenew,
+  matArrowDropDown,
+  matCancel,
+  matSubdirectoryArrowLeft,
+} from "@quasar/extras/material-icons";
+
 export default {
   components: {
     CxAddGeccoItem,
@@ -969,8 +1006,34 @@ export default {
     };
   },
   created() {
-    this.questionaireGUI = this.getQuestionnaireImportedJSON;
-    this.item = this.questionaireGUI.item;
+    this.questionnaireGUI = this.getQuestionnaireImportedJSON;
+    this.item = this.questionnaireGUI.item;
+    this.deleteIcon = matDelete;
+    this.arrowUpIcon = matKeyboardArrowUp;
+    this.expandIcon = matKeyboardArrowDown;
+    this.closeIcon = matClose;
+    this.coronavirusIcon = matCoronavirus;
+    this.article = matArticle;
+    this.info = matInfo;
+    this.text_fields = matTextFields;
+    this.toc = matToc;
+    this.toggle_off = matToggleOff;
+    this.event = matEvent;
+    this.horizontal_split = matHorizontalSplit;
+    this.pin = matPin;
+    this.input = matInput;
+    this.historyIcon = matHistory;
+    this.drag_indicator = matDragIndicator;
+    this.backIcon = matArrowBack;
+    this.device_hub = matDeviceHub;
+    this.forumIcon = matForum;
+    this.account_tree = matAccountTree;
+    this.highlight_off = matHighlightOff;
+    this.refreshIcon = matAutorenew;
+    this.dropDownIcon = matArrowDropDown;
+    this.cancelIcon = matCancel;
+    this.addIcon = matAdd;
+    this.linkIcon = matSubdirectoryArrowLeft;
   },
   data() {
     return {
@@ -979,11 +1042,11 @@ export default {
       selected: null,
       selectedItem: {},
       item: [],
-      questionaireGUI: {},
+      questionnaireGUI: {},
       enableWhenItem: {},
       lastSelected: null,
       lastSelectedItem: {},
-      limitsSpliter: [35, 100],
+      limitsSplitter: [35, 100],
     };
   },
   methods: {
@@ -1471,10 +1534,10 @@ export default {
     },
     lastSelected(val) {
       if (val) {
-        this.limitsSpliter = [0, 100];
+        this.limitsSplitter = [0, 100];
         this.splitterModel = 0;
       } else {
-        this.limitsSpliter = [35, 100];
+        this.limitsSplitter = [35, 100];
         this.splitterModel = 35;
       }
     },

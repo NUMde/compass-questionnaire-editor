@@ -12,7 +12,7 @@
         draggable="true"
         class="drop-target"
       >
-        <!--  Firts Question Level -->
+        <!--  First Question Level -->
         <template v-slot:header>
           <!--  Question Text -->
           <q-item-section>
@@ -35,7 +35,7 @@
           v-for="secondLevel in firstLevel.item"
           :key="secondLevel.linkId"
           clickable
-          @click="clickSeconItem(secondLevel)"
+          @click="clickSecondItem(secondLevel)"
         >
           <!--  Question Text -->
           <q-item-section>
@@ -53,7 +53,7 @@
           <q-item-section side>
             <div class="row">
               {{ secondLevel.linkId }}
-              <!-- Quesion Type -->
+              <!-- Question Type -->
               <q-icon name="restore" size="24px" />
               <q-toggle size="xs" v-model="secondLevel.__active"></q-toggle>
               <q-icon name="drag_handle" size="24px" />
@@ -74,7 +74,7 @@ export default {
   },
   methods: {
     ...mapMutations(["setSecondItemSelected"]),
-    clickSeconItem() {},
+    clickSecondItem() {},
   },
   computed: {
     mainQUestions() {

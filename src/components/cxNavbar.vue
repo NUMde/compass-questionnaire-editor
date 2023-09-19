@@ -2,10 +2,10 @@
   <q-toolbar>
     <q-img src="@/assets/logo.png" width="120px" class="toolbar_logo" />
     <q-toolbar-title class="text-center">{{
-      getNameofQuestionnaire
+      getNameOfQuestionnaire
     }}</q-toolbar-title>
     <q-btn
-      icon="upload_file"
+      :icon="uploadIcon"
       flat
       stack
       no-caps
@@ -15,7 +15,7 @@
     >
     <q-btn
       v-if="$route.name !== 'Import'"
-      icon="download_file"
+      :icon="downloadIcon"
       flat
       stack
       no-caps
@@ -24,7 +24,7 @@
     >
     <q-btn
       v-if="$route.name === 'Import'"
-      icon="post_add"
+      :icon="uploadIcon"
       flat
       stack
       no-caps
@@ -39,7 +39,11 @@
     <q-card>
       <q-card-section>
         <div class="text-h6">
-          <q-icon name="warning" class="text-red" style="font-size: 2rem" />
+          <q-icon
+            :name="warningIcon"
+            class="text-red"
+            style="font-size: 2rem"
+          />
           {{ $t("components.navigationBar.warningLeaveDialog.title") }}
         </div>
       </q-card-section>
@@ -65,13 +69,17 @@
       </q-card-actions>
     </q-card>
   </q-dialog>
-  <!-- alert of If someting happend the screen -->
+  <!-- alert of If something happened the screen -->
 
   <q-dialog v-model="alertError">
     <q-card>
       <q-card-section>
         <div class="text-h6">
-          <q-icon name="warning" class="text-amber" style="font-size: 2rem" />
+          <q-icon
+            :name="warningIcon"
+            class="text-amber"
+            style="font-size: 2rem"
+          />
           {{ $t("messagesErrors.warning") }}
         </div>
       </q-card-section>
@@ -96,7 +104,7 @@
       <q-card-section>
         <div class="text-h6">
           <q-icon
-            name="check_circle"
+            :name="checkIcon"
             class="text-green"
             style="font-size: 2rem"
           />
@@ -116,17 +124,23 @@ import { mapGetters, mapMutations, mapActions } from "vuex";
 import { useQuasar } from "quasar";
 import FileSaver from "file-saver";
 import { exportJsonQuestionnaire } from "../utils/exportJson";
+import {
+  matFileDownload,
+  matUploadFile,
+  matWarning,
+  matCheckCircle,
+} from "@quasar/extras/material-icons";
 export default {
   computed: {
     ...mapGetters([
-      "getNameofQuestionnaire",
+      "getNameOfQuestionnaire",
       "getQuestionnaireImportedJSON",
       "getVersionQuestionnaire",
     ]),
   },
   data() {
     return {
-      questionaireGUI: {},
+      questionnaireGUI: {},
       messageError: "",
     };
   },
@@ -148,16 +162,20 @@ export default {
     };
   },
   created() {
-    this.questionaireGUI = this.getQuestionnaireImportedJSON
+    this.questionnaireGUI = this.getQuestionnaireImportedJSON
       ? this.getQuestionnaireImportedJSON
       : {};
+    this.uploadIcon = matUploadFile;
+    this.downloadIcon = matFileDownload;
+    this.warningIcon = matWarning;
+    this.checkIcon = matCheckCircle;
   },
   methods: {
     ...mapMutations([
       "resetQuestionnaire",
       "updateVersion",
       "setFileImported",
-      "setNameofQuestionnaireNEW",
+      "setNameOfQuestionnaireNEW",
     ]),
     ...mapActions(["uploadJSONQuestionnaire"]),
     importing: function () {
@@ -189,7 +207,7 @@ export default {
           type: "application/json;charset=utf-8",
         });
         const opts = {
-          suggestedName: this.getNameofQuestionnaire,
+          suggestedName: this.getNameOfQuestionnaire,
           types: [
             {
               description: "JSON",
@@ -212,7 +230,7 @@ export default {
         if (e.message !== "The user aborted a request.") {
           this.messageError = this.$t("messagesErrors.fileNoExported");
           this.alertError = true;
-          this.FileSaver.saveAs(blob, `${this.getNameofQuestionnaire}.json`);
+          this.FileSaver.saveAs(blob, `${this.getNameOfQuestionnaire}.json`);
         }
         this.hideLoading();
       }
@@ -228,7 +246,7 @@ export default {
         identifier: [],
       };
       this.uploadJSONQuestionnaire(newQRE);
-      this.setNameofQuestionnaireNEW();
+      this.setNameOfQuestionnaireNEW();
       this.$router.push("/");
     },
   },

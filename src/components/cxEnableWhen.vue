@@ -164,7 +164,7 @@
       >
         <q-btn
           fab
-          icon="done"
+          :icon="doneIcon"
           color="primary"
           padding="none xl"
           :label="$t('views.editor.selectAnswer')"
@@ -183,6 +183,7 @@
 import { mapGetters } from "vuex";
 import { ref } from "vue";
 import { editorTools } from "../utils/editor.js";
+import { matDone } from "@quasar/extras/material-icons";
 export default {
   props: {
     internalID: {
@@ -211,6 +212,7 @@ export default {
       ? this.getQuestionnaireImportedJSON
       : {};
     this.item = this.questionaireGUI.item ? this.questionaireGUI.item : [];
+    this.doneIcon = matDone;
   },
   computed: {
     ...mapGetters(["getQuestionnaireImportedJSON"]),

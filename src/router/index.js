@@ -24,7 +24,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.name !== "Import" && !store.getters.getNameofQuestionnaire)
+  if (to.name !== "Import" && !store.getters.getNameOfQuestionnaire)
     next({ name: "Import" });
   else next();
 });

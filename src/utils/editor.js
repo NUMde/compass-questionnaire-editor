@@ -360,8 +360,8 @@ const editorTools = {
             rootItem,
           );
           if (itemToAppendCondintion) {
-            if (!itemToAppendCondintion.__dependeceCondition) {
-              itemToAppendCondintion.__dependeceCondition = {
+            if (!itemToAppendCondintion.__dependenceCondition) {
+              itemToAppendCondintion.__dependenceCondition = {
                 __icon: "account_tree",
                 __questions: [],
               };
@@ -374,7 +374,7 @@ const editorTools = {
             }
             condition.__linkId = item.linkId;
             condition.__text = item.text;
-            itemToAppendCondintion.__dependeceCondition.__questions.push(
+            itemToAppendCondintion.__dependenceCondition.__questions.push(
               condition,
             );
           }
@@ -405,8 +405,8 @@ const editorTools = {
       if (item.item) {
         this.removeCondionDependece(item.item);
       }
-      if (item.__dependeceCondition) {
-        delete item.__dependeceCondition;
+      if (item.__dependenceCondition) {
+        delete item.__dependenceCondition;
       }
     });
   },

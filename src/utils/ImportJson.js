@@ -56,8 +56,8 @@ const FHIRValidations = {
             this.questionnaire.item,
           );
           if (itemToAppendCondition) {
-            if (!itemToAppendCondition.__dependeceCondition) {
-              itemToAppendCondition.__dependeceCondition = {
+            if (!itemToAppendCondition.__dependenceCondition) {
+              itemToAppendCondition.__dependenceCondition = {
                 __icon: "account_tree",
                 __questions: [],
               };
@@ -70,7 +70,7 @@ const FHIRValidations = {
             }
             condition.__linkId = item.linkId;
             condition.__text = item.text;
-            itemToAppendCondition.__dependeceCondition.__questions.push(
+            itemToAppendCondition.__dependenceCondition.__questions.push(
               condition,
             );
           }

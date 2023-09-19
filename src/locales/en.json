@@ -73,7 +73,7 @@
       "extensions": "Extensions",
       "UUID": "UUID",
       "regenerateUUID": "Regenerate UUID",
-      "showQuestionContidions": "Show Item Conditions",
+      "showQuestionConditions": "Show Item Conditions",
       "disableItem": "Disable Item",
       "enableItem": "Enabled Item",
       "originalText": "Original Text",
@@ -84,7 +84,7 @@
       }
     },
     "tabsTitles":{
-      "ediorQRE": "Questionnaire Items",
+      "editorQRE": "Questionnaire Items",
       "metadata": "Questionnaire Metadata",
       "settings": "Editor Settings"
     },

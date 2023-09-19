@@ -16,7 +16,7 @@ const store = createStore({
   },
   mutations: {
     //metaData
-    setNameofQuestionnaireNEW(state) {
+    setNameOfQuestionnaireNEW(state) {
       state.fileImported.name = "New Questionnaire.json";
     },
     setVersion(state, payload) {
@@ -119,7 +119,7 @@ const store = createStore({
     getFileImported(state) {
       return state.fileImported;
     },
-    getNameofQuestionnaire(state) {
+    getNameOfQuestionnaire(state) {
       if (state?.fileImported?.name)
         return state.fileImported.name.split(".json")[0];
       else return "";
