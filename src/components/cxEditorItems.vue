@@ -1379,7 +1379,7 @@ export default {
       this.selectedItem.answerOption.push(newItemAnswer);
     },
     onRemoveAnswer(e) {
-      const indexOfItemtoBeRemoved = this.edtiorTools.getIndexAnswer(
+      const indexOfItemtoBeRemoved = this.editorTools.getIndexAnswer(
         e.__id,
         this.selectedItem.answerOption,
       );
