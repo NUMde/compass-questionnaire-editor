@@ -214,7 +214,7 @@
                 autogrow
                 v-model="selectedItem.text"
                 class="col-10"
-                input-class="text-h5 text-bold"
+                input-class="text-h5 text-bold itemText"
                 :disable="!selectedItem.__active"
                 :error="!selectedItem.text"
                 :label="
@@ -1481,3 +1481,8 @@ export default {
   },
 };
 </script>
+<style>
+.q-field__native.itemText {
+  line-height: initial;
+}
+</style>
