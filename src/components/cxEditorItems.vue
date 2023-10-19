@@ -250,6 +250,16 @@
             <div
               class="row items-center justify-between text-bold text-h5 q-mb-md"
             >
+              <q-checkbox
+                v-model="selectedItem.required"
+                :label="$t('views.editor.itemRequired')"
+                dense
+                size="md"
+              />
+            </div>
+            <div
+              class="row items-center justify-between text-bold text-h5 q-mb-md"
+            >
               <!-- UUID -->
               <q-input
                 :disable="!selectedItem.__active"
