@@ -270,6 +270,7 @@ const editorTools = {
       __active: true,
       disabled: false,
       __newQuestion: true,
+      required: false,
     };
     item.type = typeQuestion;
     item.definition = uuidv4();

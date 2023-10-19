@@ -8,22 +8,22 @@
     "linkId": "Link ID",
     "navigationBar": {
       "version": "Version",
-      "metaInformation":"Metadata",
-      "metadataItems":{
-        "identifier":"Identifier",
-        "URL":"URL",
-        "name":"Name",
-        "title":"Title",
-        "date":"Date",
-        "status":"Status",
-        "publisher":"Publisher",
+      "metaInformation": "Metadata",
+      "metadataItems": {
+        "identifier": "Identifier",
+        "URL": "URL",
+        "name": "Name",
+        "title": "Title",
+        "date": "Date",
+        "status": "Status",
+        "publisher": "Publisher",
         "approvalDate": "Approval Date",
         "lastReviewDate": "Last Review Date",
         "experimental": "Experimental"
       },
       "ImportJSONBtn": "Import JSON",
       "ExportJSONBtn": "Export JSON",
-      "createNewQRE":"Create new questionnaire",
+      "createNewQRE": "Create new questionnaire",
       "warningLeaveDialog": {
         "title": "Warning",
         "instructions": "Are you sure that you want to leave the edition questionnaire screen without exporting first?",
@@ -38,8 +38,8 @@
       "instructions": "Please upload a Questionnaire JSON file that you would like to edit. Drag & drop the file on this area or click here to select a file."
     },
     "editor": {
-      "conditionFulfilled":"Condition Fulfilled",
-      "enableWhenCondition":"Condition: enableWhen",
+      "conditionFulfilled": "Condition Fulfilled",
+      "enableWhenCondition": "Condition: enableWhen",
       "questionDontexist": "Question does not exist in this Questionnaire.",
       "backLastItem": "Back to item",
       "navigateToItem": "Navigate to item",
@@ -64,7 +64,7 @@
       "addAnswer": "ADD ANSWER",
       "reverseText": "Reverse Original Text",
       "newUUID": "New UUID",
-      "maxLength":"MaxLength",
+      "maxLength": "MaxLength",
       "sliderStepValue": "Slider Step Value",
       "minValue": "Min Value",
       "lowRangeLabel": "Low Range Label",
@@ -81,45 +81,46 @@
         "choice": "Choice",
         "open": "Open",
         "boolean": "Boolean"
-      }
+      },
+      "itemRequired": "Item is required"
     },
-    "tabsTitles":{
+    "tabsTitles": {
       "ediorQRE": "Questionnaire Items",
       "metadata": "Questionnaire Metadata",
       "settings": "Editor Settings"
     },
-    "tabs":{
-      "metadata":{
-        "addNewId":"Add new Identifier",
+    "tabs": {
+      "metadata": {
+        "addNewId": "Add new Identifier",
         "removeId": "Remove ID",
-        "use":"Use",
-        "system":"System",
-        "value":"Value",
-        "period":{
-          "period":"Period",
-          "start":"Start",
+        "use": "Use",
+        "system": "System",
+        "value": "Value",
+        "period": {
+          "period": "Period",
+          "start": "Start",
           "end": "End"
         },
-        "type":{
-          "type":"Type",
-          "coding":{
-            "coding":"Coding",
-            "system":"System",
-            "version":"Version",
-            "code":"Code",
-            "display":"Display",
-            "userSelected":"User Selected"
+        "type": {
+          "type": "Type",
+          "coding": {
+            "coding": "Coding",
+            "system": "System",
+            "version": "Version",
+            "code": "Code",
+            "display": "Display",
+            "userSelected": "User Selected"
           },
-          "text":"Text"
+          "text": "Text"
         }
       },
-      "settings":{
-       "Answers":{
-        "title":"Answers",
-        "AnswerValueset":"Answer Value Set",
-        "OpenChoice":"Open Choice Enabled",
-        "Choice":"Choice Enabled"
-       }
+      "settings": {
+        "Answers": {
+          "title": "Answers",
+          "AnswerValueset": "Answer Value Set",
+          "OpenChoice": "Open Choice Enabled",
+          "Choice": "Choice Enabled"
+        }
       }
     }
   },
