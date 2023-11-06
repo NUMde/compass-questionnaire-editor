@@ -82,7 +82,8 @@
         "open": "Open",
         "boolean": "Boolean"
       },
-      "itemRequired": "Item is required"
+      "itemRequired": "Item is required",
+      "itemRepeats": "More than one answer is allowed"
     },
     "tabsTitles": {
       "ediorQRE": "Questionnaire Items",

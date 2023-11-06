@@ -255,6 +255,17 @@
             </div>
             <div
               class="row items-center justify-between text-bold text-h5 q-mb-md"
+              v-if="selectedItem.type.includes('choice')"
+            >
+              <q-checkbox
+                v-model="selectedItem.repeats"
+                :label="$t('views.editor.itemRepeats')"
+                dense
+                size="md"
+              />
+            </div>
+            <div
+              class="row items-center justify-between text-bold text-h5 q-mb-md"
             >
               <!-- UUID -->
               <q-input
