@@ -271,6 +271,7 @@ const editorTools = {
       disabled: false,
       __newQuestion: true,
       required: false,
+      repeats: typeQuestion.includes("choice") ? false : undefined,
     };
     item.type = typeQuestion;
     item.definition = uuidv4();
