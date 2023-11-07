@@ -77,6 +77,9 @@
       "disableItem": "Disable Item",
       "enableItem": "Enabled Item",
       "originalText": "Original Text",
+      "restrictAnswerCount": "Restrict maximum number of allowed answers",
+      "maxAnswerCount": "Maximum count of answers",
+      "countMissing": "Count Missing!",
       "optionsAnswers": {
         "choice": "Choice",
         "open": "Open",
