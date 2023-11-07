@@ -272,6 +272,7 @@ const editorTools = {
       __newQuestion: true,
       required: false,
       repeats: typeQuestion.includes("choice") ? false : undefined,
+      __restrictMaxOccurs: typeQuestion.includes("choice") ? false : undefined,
     };
     item.type = typeQuestion;
     item.definition = uuidv4();

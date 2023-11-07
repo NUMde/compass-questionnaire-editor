@@ -270,6 +270,31 @@
             </div>
             <div
               class="row items-center justify-between text-bold text-h5 q-mb-md"
+              v-if="
+                selectedItem.type.includes('choice') && selectedItem.repeats
+              "
+            >
+              <q-checkbox
+                v-model="selectedItem.__restrictMaxOccurs"
+                :label="$t('views.editor.restrictAnswerCount')"
+                dense
+                size="md"
+              />
+            </div>
+            <div
+              class="row items-center justify-between text-bold text-h5 q-mb-md"
+              v-if="selectedItem.__restrictMaxOccurs"
+            >
+              <q-input
+                v-model="selectedItem.__maxOccurs"
+                class="col-4"
+                @update:model-value="setMaxOccurs(event)"
+                type="number"
+                :label="$t('views.editor.maxAnswerCount')"
+              />
+            </div>
+            <div
+              class="row items-center justify-between text-bold text-h5 q-mb-md"
             >
               <!-- UUID -->
               <q-input
@@ -277,7 +302,7 @@
                 v-model="selectedItem.definition"
                 :label="$t('views.editor.UUID')"
                 dense
-                class="col-8"
+                class="col-5"
               >
                 <template v-slot:after>
                   <q-btn
@@ -1426,6 +1451,14 @@ export default {
           this.deleteItemRecursivly(itemlist[idx].item, key);
         }
       }
+    },
+    setMaxOccurs() {
+      this.selectedItem.extension = [
+        {
+          url: "http://hl7.org/fhir/StructureDefinition/questionnaire-maxOccurs",
+          valueInteger: parseInt(this.selectedItem.__maxOccurs),
+        },
+      ];
     },
   },
   computed: {
