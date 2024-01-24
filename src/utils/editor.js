@@ -286,7 +286,7 @@ const editorTools = {
       item.__answerValueSetCheck = false;
     }
     if (typeQuestion === this.questionTypes.integer) {
-      item.extensions = [
+      item.extension = [
         {
           url: "http://hl7.org/fhir/StructureDefinition/questionnaire-sliderStepValue",
           valueInteger: null,
