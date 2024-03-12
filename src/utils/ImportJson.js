@@ -293,6 +293,19 @@ const FHIRValidations = {
       item.extension = item.extension || [];
       let extensionSet = [
         {
+          url: "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          valueCodeableConcept: {
+            coding: [
+              {
+                system: "http://hl7.org/fhir/questionnaire-item-control",
+                code: "slider",
+              },
+            ],
+          },
+          targetIdx: 5,
+          type: "CodeableConcept",
+        },
+        {
           url: "http://hl7.org/fhir/StructureDefinition/questionnaire-sliderStepValue",
           targetIdx: 0,
           type: "Integer",

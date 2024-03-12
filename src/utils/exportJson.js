@@ -27,7 +27,8 @@ const exportJsonQuestionnaire = {
               element.extension[i].valueInteger === null) &&
             (!element.extension[i].valueString ||
               element.extension[i].valueString === "") &&
-            !element.extension[i].valueCoding
+            !element.extension[i].valueCoding &&
+            !element.extension[i].valueCodeableConcept
           ) {
             element.extension.splice(i, 1);
           }

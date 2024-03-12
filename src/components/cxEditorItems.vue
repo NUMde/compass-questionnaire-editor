@@ -850,7 +850,9 @@
                           dense
                           type="number"
                           @keypress="onlyNumber"
-                          v-model="selectedItem.extension[0].valueInteger"
+                          v-model.number="
+                            selectedItem.extension[0].valueInteger
+                          "
                         ></q-input>
                       </q-card-section>
                     </q-item-section>
@@ -863,7 +865,9 @@
                           dense
                           type="number"
                           @keypress="onlyNumber"
-                          v-model="selectedItem.extension[1].valueInteger"
+                          v-model.number="
+                            selectedItem.extension[1].valueInteger
+                          "
                         ></q-input>
                       </q-card-section>
                     </q-item-section>
@@ -887,7 +891,9 @@
                           dense
                           type="number"
                           @keypress="onlyNumber"
-                          v-model="selectedItem.extension[3].valueInteger"
+                          v-model.number="
+                            selectedItem.extension[3].valueInteger
+                          "
                         ></q-input>
                       </q-card-section>
                     </q-item-section>
